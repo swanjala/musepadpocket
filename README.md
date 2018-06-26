@@ -2,4 +2,6 @@
 
 ## MuPP(Muse Pad Pocket)
 
+![bookicon](https://user-images.githubusercontent.com/24252450/41943854-d8e080d2-79ad-11e8-8220-457bbf477676.png)
+
 MuPP (Muse Pad Pocket) is an Android Application that allows you write down your thoughts and special moments in your daily life.
