@@ -20,7 +20,7 @@
         android:layout_marginBottom="@dimen/fab_margin_bottom"
         android:layout_marginRight="@dimen/fab_margin_right"
         android:background="@color/colorAccent"
-        android:elevation="@dimen/fab_elevation"
+        android:elevation="8dp"
         android:src="@drawable/ic_add"
 
 

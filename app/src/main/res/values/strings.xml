@@ -5,4 +5,7 @@
     <string name="login_button_text">Login</string>
     <string name="login_user_name_hint">Name</string>
     <string name="sign_up_button_text">Sign Up</string>
+    <string name="time_signature_hint_value">9:00pm</string>
+    <string name="tv_day_display_hint">Thursday</string>
+    <string name="tv_display_entry_text_hint">Going out for a walk has never been this</string>
 </resources>
