@@ -12,7 +12,7 @@ public class MuseListActivity extends AppCompatActivity {
 @Override
     protected void onCreate(Bundle onSavedInstanceState){
     super.onCreate(onSavedInstanceState);
-    setContentView(R.layout.muse_list_layout);
+    setContentView(R.layout.activity_muse_list_layout_v21);
 
 }
 }

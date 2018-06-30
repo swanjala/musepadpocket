@@ -43,4 +43,6 @@
     <dimen name="bt_delete_height">38dp</dimen>
     <dimen name="bt_delete_margin_end">16dp</dimen>
     <dimen name="bt_delete_elevation">10dp</dimen>
+    <dimen name="view_shape_thickness">9dp</dimen>
+    <dimen name="view_shape_inner_radius">0dp</dimen>
 </resources>
