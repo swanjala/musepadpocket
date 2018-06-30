@@ -7,17 +7,17 @@
     tools:context="googlecodechallenge.sam.musepadpocket.MainActivity">
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/bt_login"
         android:layout_width="@dimen/login_button_width"
         android:layout_height="@dimen/login_button_height"
         android:layout_marginBottom="@dimen/login_margin_bottom"
         android:layout_marginEnd="@dimen/login_righ_constraint"
         android:layout_marginStart="@dimen/login_left_constraint"
         android:text="@string/login_button_text"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
-        app:layout_constraintEnd_toEndOf="@+id/editText3"
+        app:layout_constraintBottom_toTopOf="@+id/bt_signup"
+        app:layout_constraintEnd_toEndOf="@+id/et_password"
         app:layout_constraintHorizontal_bias="0.937"
-        app:layout_constraintStart_toStartOf="@+id/editText3" />
+        app:layout_constraintStart_toStartOf="@+id/et_password" />
 
     <EditText
         android:id="@+id/et_user_name"
@@ -30,11 +30,11 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:hint="@string/login_user_name_hint"
-        app:layout_constraintBottom_toBottomOf="@+id/button2"
+        app:layout_constraintBottom_toBottomOf="@+id/bt_signup"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView"
+        app:layout_constraintTop_toTopOf="@+id/img_logo"
         app:layout_constraintVertical_bias="0.351" />
 
     <EditText
@@ -46,11 +46,11 @@
         android:layout_marginTop="@dimen/login_margin_top"
         android:ems="10"
         android:inputType="textPassword"
-        app:layout_constraintBottom_toTopOf="@+id/button"
-        app:layout_constraintEnd_toEndOf="@+id/editText"
+        app:layout_constraintBottom_toTopOf="@+id/bt_login"
+        app:layout_constraintEnd_toEndOf="@+id/et_user_name"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/editText"
-        app:layout_constraintTop_toBottomOf="@+id/editText"
+        app:layout_constraintStart_toStartOf="@+id/et_user_name"
+        app:layout_constraintTop_toBottomOf="@+id/et_user_name"
         app:layout_constraintVertical_bias="1.0" />
 
     <Button
@@ -63,10 +63,10 @@
         android:layout_marginTop="@dimen/sign_up_margin_top"
         android:text="@string/sign_up_button_text"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/editText3"
+        app:layout_constraintEnd_toEndOf="@+id/et_password"
         app:layout_constraintHorizontal_bias="0.933"
-        app:layout_constraintStart_toStartOf="@+id/editText3"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintStart_toStartOf="@+id/et_password"
+        app:layout_constraintTop_toBottomOf="@+id/img_logo"
         app:layout_constraintVertical_bias="1.0" />
 
     <ImageView
@@ -74,8 +74,8 @@
         android:layout_width="@dimen/layout_width_image"
         android:layout_height="@dimen/layout_height_image"
         android:layout_marginTop="@dimen/margin_top_image"
-        app:layout_constraintEnd_toEndOf="@+id/editText"
-        app:layout_constraintStart_toStartOf="@+id/editText"
+        app:layout_constraintEnd_toEndOf="@+id/et_user_name"
+        app:layout_constraintStart_toStartOf="@+id/et_user_name"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/bookicon" />
 

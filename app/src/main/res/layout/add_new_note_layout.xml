@@ -7,7 +7,7 @@
     android:layout_height="match_parent">
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/et_title"
         android:layout_width="@dimen/note_title_width"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -17,7 +17,7 @@
         tools:layout_editor_absoluteY="5dp" />
 
     <EditText
-        android:id="@+id/editText4"
+        android:id="@+id/et_notes_input"
         android:layout_width="@dimen/add_note_width"
         android:layout_height="@dimen/add_note_height"
         android:layout_marginTop="@dimen/add_note_margin_top"
@@ -25,6 +25,6 @@
         android:hint="@string/my_notes"
         android:inputType="textPersonName"
         android:singleLine="false"
-        app:layout_constraintStart_toStartOf="@+id/editText2"
-        app:layout_constraintTop_toTopOf="@+id/editText2" />
+        app:layout_constraintStart_toStartOf="@+id/et_title"
+        app:layout_constraintTop_toTopOf="@+id/et_title" />
 </android.support.constraint.ConstraintLayout>
