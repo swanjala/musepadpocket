@@ -8,22 +8,23 @@
 
     <EditText
         android:id="@+id/editText2"
-        android:layout_width="370dp"
+        android:layout_width="@dimen/note_title_width"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Title"
+        android:hint="@string/title"
         android:inputType="textPersonName"
         tools:layout_editor_absoluteX="6dp"
         tools:layout_editor_absoluteY="5dp" />
 
     <EditText
         android:id="@+id/editText4"
-        android:layout_width="375dp"
-        android:layout_height="451dp"
+        android:layout_width="@dimen/add_note_width"
+        android:layout_height="@dimen/add_note_height"
+        android:layout_marginTop="@dimen/add_note_margin_top"
         android:ems="10"
-        android:hint="My Notes"
+        android:hint="@string/my_notes"
         android:inputType="textPersonName"
         android:singleLine="false"
-        tools:layout_editor_absoluteX="6dp"
-        tools:layout_editor_absoluteY="58dp" />
+        app:layout_constraintStart_toStartOf="@+id/editText2"
+        app:layout_constraintTop_toTopOf="@+id/editText2" />
 </android.support.constraint.ConstraintLayout>
