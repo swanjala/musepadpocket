@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="googlecodechallenge.sam.musepadpocket.SignInActivity">
+
+    <Button
+        android:id="@+id/bt_login"
+        android:layout_width="@dimen/login_button_width"
+        android:layout_height="@dimen/login_button_height"
+        android:layout_marginBottom="@dimen/login_margin_bottom"
+        android:layout_marginEnd="@dimen/login_righ_constraint"
+        android:layout_marginStart="@dimen/login_left_constraint"
+        android:text="@string/login_button_text"
+        app:layout_constraintBottom_toTopOf="@+id/bt_signup"
+        app:layout_constraintEnd_toEndOf="@+id/et_password"
+        app:layout_constraintHorizontal_bias="0.937"
+        app:layout_constraintStart_toStartOf="@+id/et_password" />
+
+    <EditText
+        android:id="@+id/et_user_name"
+        android:layout_width="wrap_content"
+        android:layout_height="56dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="184dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="@string/login_user_name_hint"
+        app:layout_constraintBottom_toBottomOf="@+id/bt_signup"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/img_logo"
+        app:layout_constraintVertical_bias="0.351" />
+
+    <EditText
+        android:id="@+id/et_password"
+        android:layout_width="@dimen/password_width"
+        android:layout_height="@dimen/password_height"
+        android:layout_marginBottom="@dimen/password_margin_bottom"
+        android:layout_marginStart="@dimen/login_margin_left"
+        android:layout_marginTop="@dimen/login_margin_top"
+        android:ems="10"
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toTopOf="@+id/bt_login"
+        app:layout_constraintEnd_toEndOf="@+id/et_user_name"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/et_user_name"
+        app:layout_constraintTop_toBottomOf="@+id/et_user_name"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/bt_signup"
+        android:layout_width="@dimen/sign_up_button_width"
+        android:layout_height="@dimen/sign_up_button_height"
+        android:layout_marginBottom="@dimen/sign_up_margin_bottom"
+        android:layout_marginEnd="@dimen/sign_up_margin_end"
+        android:layout_marginStart="@dimen/signup_layout_margin_left"
+        android:layout_marginTop="@dimen/sign_up_margin_top"
+        android:text="@string/sign_up_button_text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/et_password"
+        app:layout_constraintHorizontal_bias="0.933"
+        app:layout_constraintStart_toStartOf="@+id/et_password"
+        app:layout_constraintTop_toBottomOf="@+id/img_logo"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <ImageView
+        android:id="@+id/img_logo"
+        android:layout_width="@dimen/layout_width_image"
+        android:layout_height="@dimen/layout_height_image"
+        android:layout_marginTop="@dimen/margin_top_image"
+        app:layout_constraintEnd_toEndOf="@+id/et_user_name"
+        app:layout_constraintStart_toStartOf="@+id/et_user_name"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/bookicon" />
+
+</android.support.constraint.ConstraintLayout>

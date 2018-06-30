@@ -8,19 +8,19 @@
     >
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/muselistViewer"
+        android:id="@+id/rc_muse_list_viewer"
         android:layout_width="match_parent"
-        android:layout_height="597dp" />
+        android:layout_height="@dimen/recycler_view_layout_height" />
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/floatingButton"
-        android:layout_width="67dp"
-        android:layout_height="71dp"
+        android:id="@+id/fb_add_muse"
+        android:layout_width="@dimen/fab_layout_width"
+        android:layout_height="@dimen/fag_layout_height"
         android:layout_gravity="bottom|right"
-        android:layout_marginBottom="20dp"
-        android:layout_marginRight="20dp"
+        android:layout_marginBottom="@dimen/fab_margin_bottom"
+        android:layout_marginRight="@dimen/fab_margin_right"
         android:background="@color/colorAccent"
-        android:elevation="8dp"
+        android:elevation="@dimen/fab_elevation"
         android:src="@drawable/ic_add"
 
 
