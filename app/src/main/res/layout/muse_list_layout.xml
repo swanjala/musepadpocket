@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/muselistViewer"
+        android:layout_width="match_parent"
+        android:layout_height="597dp" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/floatingButton"
+        android:layout_width="67dp"
+        android:layout_height="71dp"
+        android:layout_gravity="bottom|right"
+        android:layout_marginBottom="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@color/colorAccent"
+        android:elevation="8dp"
+        android:src="@drawable/ic_add"
+
+
+        app:fabSize="normal"
+        tools:layout_editor_absoluteX="297dp"
+        tools:layout_editor_absoluteY="420dp" />
+
+</android.support.design.widget.CoordinatorLayout>
