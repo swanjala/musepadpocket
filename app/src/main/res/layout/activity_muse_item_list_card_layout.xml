@@ -12,37 +12,13 @@
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:background="#f4f4f4"
-        android:id="@+id/cl_muse_list_constraint">
+        android:id="@+id/cl_muse_item_list_constraint">
 
-        <Button
-            android:id="@+id/bt_line_two"
-            android:layout_width="@dimen/bt_line_two_width"
-            android:layout_height="@dimen/bt_line_two_height"
-            android:layout_gravity="center"
-
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="92dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="@dimen/bt_line_two_margin_top"
-            android:background="@drawable/view_shape_round"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/tv_items_day_display"
-            app:layout_constraintHorizontal_bias="0.119"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.133" />
-
-        <View
-            android:layout_width="3dp"
-            android:layout_height="fill_parent"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="36dp"
-            android:background="@color/colorAccent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="0dp" />
-
+        <ImageView
+            android:id="@+id/note_icon"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/ic_note_icon" />
 
         <TextView
             android:id="@+id/tv_items_day_display"
@@ -52,10 +28,10 @@
             android:hint="@string/tv_day_display_hint"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/bt_delete"
-            app:layout_constraintTop_toTopOf="@+id/bt_line_two" />
+            tools:layout_editor_absoluteY="16dp" />
 
         <TextView
-            android:id="@+id/tv_display_entry_text"
+            android:id="@+id/tv_items_display_entry_text"
             android:layout_width="@dimen/tv_display_entry_text_layout_width"
             android:layout_height="40dp"
             android:layout_marginEnd="20dp"

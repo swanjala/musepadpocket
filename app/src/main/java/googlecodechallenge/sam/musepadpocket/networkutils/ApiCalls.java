@@ -3,7 +3,6 @@ package googlecodechallenge.sam.musepadpocket.networkutils;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.StrictMode;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.Toast;
@@ -29,7 +28,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import googlecodechallenge.sam.musepadpocket.SignInActivity;
+import googlecodechallenge.sam.musepadpocket.views.EditNoteActivity;
+import googlecodechallenge.sam.musepadpocket.views.SignInActivity;
 import googlecodechallenge.sam.musepadpocket.models.UserModel;
 
 /**
@@ -42,6 +42,7 @@ public class ApiCalls {
     UserModel userModel;
 
     private HttpPost postObject;
+    private HttpPut putObject;
     private HttpGet getObject;
     private String userName,password,email;
     URL url;
@@ -174,180 +175,76 @@ public class ApiCalls {
     }
 
 
-//    public boolean createBucketList(String name){
-//
-//        token = getToken();
-//        if (token.equals("")){
-//            Log.d("Auth ", "Not Authorized, Login in again");
-//            return false;
-//        } else {
-//
-//            HttpClient httpclient = new DefaultHttpClient();
-//            HttpPost httpPost = new HttpPost("http://10.0.2.2:5000/api/v1/bucketlists");
-//            httpPost.addHeader("Content-Type","application/x-www-form-urlencoded");
-//            httpPost.addHeader("Authorization","Bearer "+token);
-//
-//            try {
-//                List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
-//                nameValuePairs.add(new BasicNameValuePair("name", name));
-//                httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-//
-//                HttpResponse response = httpclient.execute(httpPost);
-//                int responseCode = response.getStatusLine().getStatusCode();
-//
-//                if (responseCode == 200){
-//                    return true;
-//                }else{
-//                    return false;
-//                }
-//
-//
-//            } catch (ClientProtocolException e) {
-//                return false;
-//
-//            } catch (IOException e) {
-//                Log.d("Exception",e.getLocalizedMessage());
-//
-//            }
-//
-//        }
-//        return false;
-//    }
-//    public boolean editBucketList(int id, String newName){
-//
-//        if (token.equals("")){
-//            Log.d("Auth : ", "Not Authorized");
-//            return false;
-//        }else {
-//            HttpClient httpclient = new DefaultHttpClient();
-//            HttpPut httpPut = new HttpPut("http://10.0.2.2:5000/api/v1/bucketlists/"+id);
-//
-//            try {
-//
-//                httpPut.addHeader("Content-Type","application/x-www-form-urlencoded");
-//                httpPut.addHeader("Authorization","Bearer "+token);
-//                List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
-//                nameValuePairs.add(new BasicNameValuePair("name", newName));
-//                httpPut.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-//
-//                HttpResponse response = httpclient.execute(httpPut);
-//                int responseCode = response.getStatusLine().getStatusCode();
-//
-//                /*
-//                * TODO
-//                * Debug API HTTP Responses */
-//
-//                if (responseCode == 200){
-//                    return true;
-//                }else if (responseCode == 201){
-//                    return true;
-//                }
-//
-//            } catch (ClientProtocolException e) {
-//
-//            } catch (IOException e) {
-//
-//            }
-//
-//        }
-//
-//        return false;
-//    }
-//    public boolean deleteBucketList(int id){
-//        if (token.equals("")){
-//            Log.d("Auth : ", "Not Authorized");
-//            return false;
-//        }else {
-//            HttpClient httpclient = new DefaultHttpClient();
-//            HttpDelete httpDelete = new HttpDelete("http://10.0.2.2:5000/api/v1/bucketlists/"+id);
-//
-//            try {
-//
-//                httpDelete.addHeader("Content-Type","application/x-www-form-urlencoded");
-//                httpDelete.addHeader("Authorization","Bearer "+token);
-//                HttpResponse response = httpclient.execute(httpDelete);
-//                int responseCode = response.getStatusLine().getStatusCode();
-//
-//                if (responseCode == 200){
-//                    return true;
-//                }
-//
-//            } catch (ClientProtocolException e) {
-//
-//            } catch (IOException e) {
-//
-//            }
-//
-//        }
-//        return false;
-//    }
-//    public boolean createItem(List<ItemFields> newItems) {
-//        token = getToken();
-//        String name = newItems.get(0).getItemName();
-//
-//        if (token.equals("")) {
-//            Log.d("Auth ", "Not Authorized, Login in again");
-//            return false;
-//        } else {
-//
-//            HttpClient httpclient = new DefaultHttpClient();
-//            HttpPost httpPost = new HttpPost("http://10.0.2.2:5000/api/v1/items");
-//
-//            try {
-//
-//                httpPost.addHeader("Content-Type", "application/x-www-form-urlencoded");
-//                httpPost.addHeader("Authorization", "Bearer " + token);
-//                List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
-//                nameValuePairs.add(new BasicNameValuePair("name", name));
-//                nameValuePairs.add(new BasicNameValuePair("status", "false"));
-//                httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-//
-//                HttpResponse response = httpclient.execute(httpPost);
-//                int responseCode = response.getStatusLine().getStatusCode();
-//
-//                if (responseCode == 200) {
-//                    return true;
-//                }
-//
-//            } catch (ClientProtocolException e) {
-//
-//            } catch (IOException e) {
-//
-//            }
-//            return false;
-//        }
-//    }
-//    public boolean editItem(int id,String newItemName){
-//        if (token.equals("")){
-//            Log.d("Auth : ", "Not Authorized");
-//            return false;
-//        }else {
-//            HttpClient httpclient = new DefaultHttpClient();
-//            HttpPut httpPut = new HttpPut("http://10.0.2.2:5000/api/v1/items/"+id);
-//
-//            try {
-//
-//                httpPut.addHeader("Content-Type","application/x-www-form-urlencoded");
-//                httpPut.addHeader("Authorization","Bearer "+token);
-//                List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
-//                nameValuePairs.add(new BasicNameValuePair("name", newItemName));
-//                httpPut.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-//
-//                HttpResponse response = httpclient.execute(httpPut);
-//                int responseCode = response.getStatusLine().getStatusCode();
-//
-//                if (responseCode == 200){
-//                    return true;
-//                }
-//
-//            } catch (ClientProtocolException e) {
-//
-//            } catch (IOException e) {
-//
-//            }
-//
-//        }
-//
-//        return false;
-//    }
+    public Boolean addNote(URL url,String entry, String item_name){
+
+        NetworkInstance networkInstance = new NetworkInstance(url);
+
+        List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(2);
+        nameValuePair.add(new BasicNameValuePair("name",item_name));
+        nameValuePair.add(new BasicNameValuePair("description",entry));
+
+        try{
+            postObject =networkInstance.postMethodWithoutHeaders();
+            postObject.setEntity(new UrlEncodedFormEntity(nameValuePair));
+        }catch(UnsupportedEncodingException e){
+
+            e.printStackTrace();
+        }
+        try {
+            HttpResponse response = httpClient.execute(postObject);
+            String responseString = EntityUtils.toString(response.getEntity());
+
+            if (responseString.contains("item has been added")){
+                return true;
+            }
+
+
+        }catch (ClientProtocolException e){
+            Log.d("Error", e.getMessage());
+        }catch (IOException e){
+
+            e.printStackTrace();
+
+        }
+
+        return false;
+    }
+    public Boolean editNote(URL url,String entry, String item_name, Context context){
+
+        NetworkInstance networkInstance = new NetworkInstance(url);
+
+        List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(2);
+        nameValuePair.add(new BasicNameValuePair("name",item_name));
+        nameValuePair.add(new BasicNameValuePair("description",entry));
+
+        try{
+            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+            String token = "Bearer ".concat(sharedPreferences.getString("token",""));
+
+            putObject =networkInstance.putMethodWithoutHeaders(token);
+            putObject.setEntity(new UrlEncodedFormEntity(nameValuePair));
+        }catch(UnsupportedEncodingException e){
+
+            e.printStackTrace();
+        }
+        try {
+            HttpResponse response = httpClient.execute(putObject);
+            String responseString = EntityUtils.toString(response.getEntity());
+
+            if (responseString.contains("item has been updated")){
+                return true;
+            }
+
+
+        }catch (ClientProtocolException e){
+            Log.d("Error", e.getMessage());
+        }catch (IOException e){
+
+            e.printStackTrace();
+
+        }
+
+        return false;
+    }
+
 }
