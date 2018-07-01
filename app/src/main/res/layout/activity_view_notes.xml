@@ -9,12 +9,12 @@
     >
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/rc_muse_list_viewer"
+        android:id="@+id/rc_muse_item_list_viewer"
         android:layout_width="match_parent"
         android:layout_height="@dimen/recycler_view_layout_height" />
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fb_add_muse"
+        android:id="@+id/fb_add_muse_item"
         android:layout_width="@dimen/fab_layout_width"
         android:layout_height="@dimen/fag_layout_height"
         android:layout_gravity="bottom|right"

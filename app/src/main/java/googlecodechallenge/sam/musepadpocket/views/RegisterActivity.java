@@ -1,4 +1,4 @@
-package googlecodechallenge.sam.musepadpocket;
+package googlecodechallenge.sam.musepadpocket.views;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 import java.net.URL;
 
-import googlecodechallenge.sam.musepadpocket.models.UserModel;
+import googlecodechallenge.sam.musepadpocket.R;
 import googlecodechallenge.sam.musepadpocket.networkutils.ApiCalls;
 import googlecodechallenge.sam.musepadpocket.networkutils.BuildUrls;
 

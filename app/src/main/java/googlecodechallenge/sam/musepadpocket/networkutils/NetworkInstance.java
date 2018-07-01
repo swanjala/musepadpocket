@@ -5,6 +5,7 @@ import android.content.Context;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpPut;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import java.net.URL;
@@ -38,6 +39,13 @@ public class NetworkInstance {
         httpGet.addHeader("Content-Type", "application/x-www-form-urlencoded");
         httpGet.addHeader("Authorization", token);
         return httpGet;
+    }
+    public HttpPut putMethodWithoutHeaders(String token){
+        HttpPut httpPut = new HttpPut(String.valueOf(url));
+
+        httpPut.addHeader("Content-Type", "application/x-www-form-urlencoded");
+        httpPut.addHeader("Authorization", token);
+        return httpPut;
     }
 
 }

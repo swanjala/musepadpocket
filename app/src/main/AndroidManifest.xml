@@ -11,15 +11,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SignInActivity">
+        <activity android:name=".views.SignInActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RegisterActivity"/>
-        <activity android:name=".MuseListActivity"/>
+        <activity android:name=".views.RegisterActivity"/>
+        <activity android:name=".views.MuseListActivity"/>
+        <activity android:name=".views.ViewNotesActivity"/>
+        <activity android:name=".views.EditNoteActivity"/>
     </application>
 
 </manifest>
