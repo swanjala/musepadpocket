@@ -23,8 +23,6 @@
         android:background="@color/colorAccent"
         android:elevation="@dimen/fab_elevation"
         android:src="@drawable/ic_add"
-
-
         app:fabSize="normal"
         tools:layout_editor_absoluteX="297dp"
         tools:layout_editor_absoluteY="420dp" />

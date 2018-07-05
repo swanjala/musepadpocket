@@ -62,6 +62,19 @@ public final class BuildUrls {
             return null;
         }
     }
+    public static URL buildUrlForItemActions(String museId){
+        STATIC_MUSE_URL = context.getString(R.string.static_muselist_url);
+        Uri itemAdditionUri = Uri.parse(STATIC_MUSE_BASE_URL).buildUpon()
+                .appendEncodedPath(STATIC_MUSE_URL)
+                .appendEncodedPath(museId+"/items")
+                .build();
+        try{
+            return new URL(itemAdditionUri.toString());
+        }catch (MalformedURLException e){
+            e.printStackTrace();
+            return null;
+        }
+    }
     public static URL buildUrlForItemActions(String museId,String noteId) {
         STATIC_MUSE_URL= context.getString(R.string.static_muselist_url);
         Uri itemActionsUri = Uri.parse(STATIC_MUSE_BASE_URL).buildUpon()

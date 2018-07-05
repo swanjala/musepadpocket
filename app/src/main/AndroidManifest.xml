@@ -22,6 +22,8 @@
         <activity android:name=".views.MuseListActivity"/>
         <activity android:name=".views.ViewNotesActivity"/>
         <activity android:name=".views.EditNoteActivity"/>
+        <activity android:name=".views.AddNoteActivity"/>
+        <activity android:name=".views.AddMuseActivity"/>
     </application>
 
 </manifest>

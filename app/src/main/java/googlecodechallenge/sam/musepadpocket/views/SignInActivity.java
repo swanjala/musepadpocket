@@ -18,6 +18,10 @@ import googlecodechallenge.sam.musepadpocket.R;
 import googlecodechallenge.sam.musepadpocket.networkutils.ApiCalls;
 import googlecodechallenge.sam.musepadpocket.networkutils.BuildUrls;
 
+/*
+* Class lets the user sign into the application
+* */
+
 public class SignInActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button signup,bt_login_user;
@@ -34,7 +38,6 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         signup.setOnClickListener(this);
         bt_login_user = findViewById(R.id.bt_login);
         bt_login_user.setOnClickListener(this);
-
 
         StrictMode.ThreadPolicy policy =new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
@@ -61,7 +64,6 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
 
     public void signIn(){
         BuildUrls buildUrls = new BuildUrls(this);
-        //buildUrls.buildUrlForUserSignUp();
         URL url = buildUrls.buildUrlForUserLogin();
         Log.d("Url",String.valueOf(url));
 
@@ -70,7 +72,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         String successToken= apiCalls.login(url,userName, password);
 
         if (successToken.equals("")){
-            Toast.makeText(this,"Unable to log you in",Toast.LENGTH_LONG).show();
+            Toast.makeText(this, R.string.unable_to_login,Toast.LENGTH_LONG).show();
 
         }else {
             SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
@@ -82,10 +84,6 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
             startActivity(intent);
 
         }
-
-//        buildUrls.buildUrlForUserLogin();
-//        buildUrls.buildUrlForMuseActions();
-//        buildUrls.buildUrlForItemActions("1");
     }
 
 }

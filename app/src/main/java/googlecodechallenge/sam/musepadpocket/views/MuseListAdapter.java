@@ -24,8 +24,6 @@ public class MuseListAdapter extends
     private JSONArray mDataSet;
     private LayoutInflater layoutInflater;
     private Context context;
-    private String museName;
-    private String museDate;
 
     public MuseListAdapter(Context context, JSONArray museDataJsonArray) {
         mDataSet = museDataJsonArray;
@@ -45,10 +43,8 @@ public class MuseListAdapter extends
     }
 
 
-
     @Override
     public void onBindViewHolder(MuseListViewAdapter holder, int position) {
-
 
         holder.setData(mDataSet,position);
 
@@ -96,6 +92,7 @@ public class MuseListAdapter extends
                  Intent intent = new Intent(context,ViewNotesActivity.class);
                  try {
                      intent.putExtra("Data",data.getString("items"));
+                     intent.putExtra("Id",data.getString("id"));
                  } catch (JSONException e) {
                      e.printStackTrace();
                  }

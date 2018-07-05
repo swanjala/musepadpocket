@@ -28,9 +28,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import googlecodechallenge.sam.musepadpocket.views.EditNoteActivity;
+import googlecodechallenge.sam.musepadpocket.R;
 import googlecodechallenge.sam.musepadpocket.views.SignInActivity;
-import googlecodechallenge.sam.musepadpocket.models.UserModel;
 
 /**
  * Created by sam on 7/1/18.
@@ -38,26 +37,25 @@ import googlecodechallenge.sam.musepadpocket.models.UserModel;
 
 public class ApiCalls {
 
+    URL url;
     private HttpClient httpClient = new DefaultHttpClient();
-    UserModel userModel;
-
     private HttpPost postObject;
     private HttpPut putObject;
     private HttpGet getObject;
-    private String userName,password,email;
-    URL url;
+    private String userName, password, email;
 
-    public ApiCalls(URL url,String userName, String password, String email) {
+    public ApiCalls(URL url, String userName, String password, String email) {
         this.userName = userName;
         this.password = password;
         this.email = email;
         this.url = url;
     }
-    public ApiCalls(){
+
+    public ApiCalls() {
 
     }
 
-    public boolean registerUser(){
+    public boolean registerUser() {
 
         NetworkInstance networkInstance = new NetworkInstance(this.url);
         List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(3);
@@ -75,7 +73,7 @@ public class ApiCalls {
         try {
             HttpResponse response = httpClient.execute(postObject);
             String responseString = EntityUtils.toString(response.getEntity());
-            if (responseString.contains("You have been successfully added")){
+            if (responseString.contains("You have been successfully added")) {
 
                 return true;
             }
@@ -91,60 +89,94 @@ public class ApiCalls {
         return false;
     }
 
-    public String login(URL loginUrl,String userName, String password){
+    public String login(URL loginUrl, String userName, String password) {
 
         NetworkInstance networkInstance = new NetworkInstance(loginUrl);
 
-            List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(2);
-            nameValuePair.add(new BasicNameValuePair("username",userName));
-            nameValuePair.add(new BasicNameValuePair("password",password));
+        List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(2);
+        nameValuePair.add(new BasicNameValuePair("username", userName));
+        nameValuePair.add(new BasicNameValuePair("password", password));
 
-            try{
-                postObject =networkInstance.postMethodWithoutHeaders();
-                postObject.setEntity(new UrlEncodedFormEntity(nameValuePair));
-            }catch(UnsupportedEncodingException e){
+        try {
+            postObject = networkInstance.postMethodWithoutHeaders();
+            postObject.setEntity(new UrlEncodedFormEntity(nameValuePair));
+        } catch (UnsupportedEncodingException e) {
 
-                e.printStackTrace();
+            e.printStackTrace();
+        }
+        try {
+            HttpResponse response = httpClient.execute(postObject);
+            String responseString = EntityUtils.toString(response.getEntity());
+
+            if (responseString.contains("Could not log you in, Check credentials")) {
+                return "";
             }
-            try {
-                HttpResponse response = httpClient.execute(postObject);
-                String responseString = EntityUtils.toString(response.getEntity());
 
-                if (responseString.contains("Could not log you in, Check credentials")){
-                    return "";
-                }
-
-                JSONObject jsonResponse = new JSONObject(responseString);
-                String token = jsonResponse.getString("token");
-                return token;
+            JSONObject jsonResponse = new JSONObject(responseString);
+            String token = jsonResponse.getString("token");
+            return token;
 
 
-            }catch (ClientProtocolException e){
-                Log.d("Error", e.getMessage());
-            }catch (IOException e){
+        } catch (ClientProtocolException e) {
+            Log.d("Error", e.getMessage());
+        } catch (IOException e) {
 
-                e.printStackTrace();
+            e.printStackTrace();
 
-            }catch (JSONException e){
-                e.printStackTrace();
-            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
 
         return "";
     }
 
-    public JSONArray getMuseList(URL getMuseListUrl,Context context) {
+    public boolean addMuse(URL url, String muse_name, String muse_description, Context context) {
 
-        JSONArray jsonArray = new JSONArray();
-        NetworkInstance networkInstance= new NetworkInstance(getMuseListUrl);
+        NetworkInstance networkInstance = new NetworkInstance(url);
+        List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(3);
+        nameValuePair.add(new BasicNameValuePair("name", muse_name));
+        nameValuePair.add(new BasicNameValuePair("description", muse_description));
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-        String token = "Bearer ".concat(sharedPreferences.getString("token",""));
+        String token = "Bearer ".concat(sharedPreferences.getString("token", ""));
 
-        Log.d("BucketList Token", token);
+        try {
+            postObject = networkInstance.postMethodWithHeaders(token);
+            postObject.setEntity(new UrlEncodedFormEntity(nameValuePair));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            HttpResponse response = httpClient.execute(postObject);
+            String responseString = EntityUtils.toString(response.getEntity());
+            if (responseString.contains(" success")) {
+
+                return true;
+            }
+        } catch (ClientProtocolException e) {
+
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+    public JSONArray getMuseList(URL getMuseListUrl, Context context) {
+
+        JSONArray jsonArray = new JSONArray();
+        NetworkInstance networkInstance = new NetworkInstance(getMuseListUrl);
+
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        String token = "Bearer ".concat(sharedPreferences.getString("token", ""));
 
         if (token.equals("")) {
-            Toast.makeText(context,"You are not logged in, Try Again",Toast.LENGTH_LONG).show();
+            Toast.makeText(context, R.string.error_logginin, Toast.LENGTH_LONG).show();
             Intent intent = new Intent(context, SignInActivity.class);
             context.startActivity(intent);
 
@@ -175,18 +207,18 @@ public class ApiCalls {
     }
 
 
-    public Boolean addNote(URL url,String entry, String item_name){
+    public Boolean addNote(URL url, String entry, String item_name, String token) {
 
         NetworkInstance networkInstance = new NetworkInstance(url);
 
         List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(2);
-        nameValuePair.add(new BasicNameValuePair("name",item_name));
-        nameValuePair.add(new BasicNameValuePair("description",entry));
+        nameValuePair.add(new BasicNameValuePair("name", item_name));
+        nameValuePair.add(new BasicNameValuePair("description", entry));
 
-        try{
-            postObject =networkInstance.postMethodWithoutHeaders();
+        try {
+            postObject = networkInstance.postMethodWithHeaders(token);
             postObject.setEntity(new UrlEncodedFormEntity(nameValuePair));
-        }catch(UnsupportedEncodingException e){
+        } catch (UnsupportedEncodingException e) {
 
             e.printStackTrace();
         }
@@ -194,14 +226,14 @@ public class ApiCalls {
             HttpResponse response = httpClient.execute(postObject);
             String responseString = EntityUtils.toString(response.getEntity());
 
-            if (responseString.contains("item has been added")){
+            if (responseString.contains("item has been added")) {
                 return true;
             }
 
 
-        }catch (ClientProtocolException e){
+        } catch (ClientProtocolException e) {
             Log.d("Error", e.getMessage());
-        }catch (IOException e){
+        } catch (IOException e) {
 
             e.printStackTrace();
 
@@ -209,21 +241,22 @@ public class ApiCalls {
 
         return false;
     }
-    public Boolean editNote(URL url,String entry, String item_name, Context context){
+
+    public Boolean editNote(URL url, String entry, String item_name, Context context) {
 
         NetworkInstance networkInstance = new NetworkInstance(url);
 
         List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(2);
-        nameValuePair.add(new BasicNameValuePair("name",item_name));
-        nameValuePair.add(new BasicNameValuePair("description",entry));
+        nameValuePair.add(new BasicNameValuePair("name", item_name));
+        nameValuePair.add(new BasicNameValuePair("description", entry));
 
-        try{
+        try {
             SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-            String token = "Bearer ".concat(sharedPreferences.getString("token",""));
+            String token = "Bearer ".concat(sharedPreferences.getString("token", ""));
 
-            putObject =networkInstance.putMethodWithoutHeaders(token);
+            putObject = networkInstance.putMethodWithoutHeaders(token);
             putObject.setEntity(new UrlEncodedFormEntity(nameValuePair));
-        }catch(UnsupportedEncodingException e){
+        } catch (UnsupportedEncodingException e) {
 
             e.printStackTrace();
         }
@@ -231,14 +264,14 @@ public class ApiCalls {
             HttpResponse response = httpClient.execute(putObject);
             String responseString = EntityUtils.toString(response.getEntity());
 
-            if (responseString.contains("item has been updated")){
+            if (responseString.contains("item has been updated")) {
                 return true;
             }
 
 
-        }catch (ClientProtocolException e){
+        } catch (ClientProtocolException e) {
             Log.d("Error", e.getMessage());
-        }catch (IOException e){
+        } catch (IOException e) {
 
             e.printStackTrace();
 
