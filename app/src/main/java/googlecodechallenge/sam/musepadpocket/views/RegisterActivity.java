@@ -16,7 +16,7 @@ import googlecodechallenge.sam.musepadpocket.networkutils.ApiCalls;
 import googlecodechallenge.sam.musepadpocket.networkutils.BuildUrls;
 
 /**
- * Created by sam on 7/1/18.
+ * Class lets the user sign up , added to a remote database
  */
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
@@ -50,24 +50,18 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     public void signUp(){
         BuildUrls buildUrls = new BuildUrls(this);
-        //buildUrls.buildUrlForUserSignUp();
         URL url = buildUrls.buildUrlForUserSignUp();
         Log.d("Urlm",String.valueOf(url));
 
         ApiCalls apiCalls = new ApiCalls(url,username,password,email);
         boolean successRegister = apiCalls.registerUser();
         if (successRegister){
-            Toast.makeText(this,"Successfully Registered",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.success_registration,Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this, SignInActivity.class);
             startActivity(intent);
         }else {
-            Toast.makeText(this,"Unable to Register",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.unable_to_register,Toast.LENGTH_SHORT).show();
 
         }
-
-
-//        buildUrls.buildUrlForUserLogin();
-//        buildUrls.buildUrlForMuseActions();
-//        buildUrls.buildUrlForItemActions("1");
     }
 }

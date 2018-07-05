@@ -9,16 +9,23 @@
 
     <Button
         android:id="@+id/bt_save_note"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="@dimen/save_button_width"
+        android:layout_height="@dimen/save_button_new_note_height"
         android:background="@drawable/ic_add_note" />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/et_note_title"/>
 
     <EditText
         android:id="@+id/et_notes_input"
         android:layout_width="match_parent"
-        android:layout_height="457dp"
+        android:layout_height="@dimen/et_notes_input_height"
+        android:layout_gravity="top"
         android:ems="10"
         android:hint="@string/my_notes"
-        android:inputType="textMultiLine" />
+        android:inputType="textMultiLine"
+        android:textAlignment="viewStart"
+        android:gravity="top|left"/>
 
 </LinearLayout>

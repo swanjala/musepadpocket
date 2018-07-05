@@ -14,7 +14,7 @@
         android:layout_height="@dimen/recycler_view_layout_height" />
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fb_add_muse_item"
+        android:id="@+id/fb_add_muse_notes"
         android:layout_width="@dimen/fab_layout_width"
         android:layout_height="@dimen/fag_layout_height"
         android:layout_gravity="bottom|right"

@@ -15,7 +15,7 @@ import org.json.JSONObject;
 import googlecodechallenge.sam.musepadpocket.R;
 
 /**
- * Created by sam on 7/1/18.
+ * Creates an adapter that lists muses.
  */
 
 public class MuseListItemsAdapter extends RecyclerView.

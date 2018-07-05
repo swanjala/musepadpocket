@@ -45,4 +45,9 @@
     <dimen name="bt_delete_elevation">10dp</dimen>
     <dimen name="view_shape_thickness">9dp</dimen>
     <dimen name="view_shape_inner_radius">0dp</dimen>
+    <dimen name="item_muse_title_height">53dp</dimen>
+    <dimen name="muse_description_input_height">62dp</dimen>
+    <dimen name="save_button_width">50dp</dimen>
+    <dimen name="save_button_new_note_height">50dp</dimen>
+    <dimen name="et_notes_input_height">457dp</dimen>
 </resources>

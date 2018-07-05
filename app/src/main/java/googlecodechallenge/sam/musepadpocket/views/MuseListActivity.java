@@ -1,12 +1,16 @@
 package googlecodechallenge.sam.musepadpocket.views;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 
@@ -20,14 +24,16 @@ import googlecodechallenge.sam.musepadpocket.networkutils.BuildUrls;
  * The main class displays all the muses from the api.
  */
 
-public class MuseListActivity extends AppCompatActivity {
-
+public class MuseListActivity extends AppCompatActivity  implements View.OnClickListener{
+  FloatingActionButton fb_add_new_muse;
 
     @Override
     protected void onCreate(Bundle onSavedInstanceState) {
         super.onCreate(onSavedInstanceState);
         setContentView(R.layout.activity_muse_list_layout);
-        initRecyclerView(this);
+        initViews(this);
+
+
     }
 
     @Override
@@ -39,10 +45,13 @@ public class MuseListActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        initRecyclerView(this);
+        initViews(this);
     }
 
-    public void initRecyclerView(Context context) {
+    public void initViews(Context context) {
+
+        fb_add_new_muse = findViewById(R.id.fb_add_muse);
+        fb_add_new_muse.setOnClickListener(this);
 
         RecyclerView mRecyclerView = findViewById(R.id.rc_muse_list_viewer);
         mRecyclerView.setHasFixedSize(true);
@@ -68,11 +77,27 @@ public class MuseListActivity extends AppCompatActivity {
         return jsonArrayMuseData;
     }
 
+    private void addMuse(){
+       Intent intent = new Intent(this, AddMuseActivity.class);
+       startActivity(intent);
+
+    }
+
     private URL initUrlBuilder() {
         BuildUrls buildUrls = new BuildUrls(this);
         URL url = buildUrls.buildUrlForMuseActions();
 
         return url;
+    }
+
+
+    @Override
+    public void onClick(View view){
+        int viewId = view.getId();
+
+        if(viewId == R.id.fb_add_muse){
+            addMuse();
+        }
     }
 
 

@@ -12,7 +12,7 @@ Get started, set up https://github.com/swanjala/MusePad local host( Find instruc
  
  Once You are all set up, sign up on the app and log in. 
  
-![screen1](https://user-images.githubusercontent.com/24252450/42138921-e1caeb36-7d8d-11e8-8016-69e965653f1c.png)
+![screen1](https://user-images.githubusercontent.com/24252450/42138921-e1caeb36-7d8d-11e8-8016-69e965653f1c.png])
 
 Signing in will lead you to the home screen which contains a list of your notes, and will be blank if you have none.
 on this screen, all your notes groups(Muses) will appear. Each muse contains a collection of related notes

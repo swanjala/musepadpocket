@@ -18,7 +18,7 @@ import googlecodechallenge.sam.musepadpocket.networkutils.ApiCalls;
 import googlecodechallenge.sam.musepadpocket.networkutils.BuildUrls;
 
 /**
- * Created by sam on 7/1/18.
+ * Edit note allows tha user to edit and already existing note
  */
 
 public class EditNoteActivity extends AppCompatActivity {
@@ -40,8 +40,8 @@ public class EditNoteActivity extends AppCompatActivity {
         final Bundle extras = getIntent().getExtras();
 
         et_my_note_entry.setText( extras.getString("Description"));
-        this.museId = extras.getString("MuseId");
-        this.noteId = extras.getString("NoteId");
+        this.museId = extras.getString(getString(R.string.muse_id));
+        this.noteId = extras.getString(getString(R.string.note_id));
 
 
         bt_save_note.setOnClickListener(new View.OnClickListener() {
@@ -59,9 +59,9 @@ public class EditNoteActivity extends AppCompatActivity {
         ApiCalls apiCalls = new ApiCalls();
         Boolean saveNote = apiCalls.editNote(initUrlBuilder(), entry, item_name,this);
         if (saveNote) {
-            Toast.makeText(this, "Note saved successfully", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, R.string.note_saved_successfully, Toast.LENGTH_LONG).show();
         } else {
-            Toast.makeText(this, "Note not saved try again", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, R.string.note_note_saved, Toast.LENGTH_LONG).show();
         }
 
     }
@@ -69,8 +69,6 @@ public class EditNoteActivity extends AppCompatActivity {
     private URL initUrlBuilder() {
         BuildUrls buildUrls = new BuildUrls(this);
         URL url = buildUrls.buildUrlForItemActions(museId,noteId);
-        Log.d("data goes",String.valueOf(url));
-
         return url;
     }
 
