@@ -6,9 +6,9 @@
 
 MuPP (Muse Pad Pocket) is an Android Application that allows you write down your thoughts and special moments in your daily life.
 
-Get started, set up https://github.com/swanjala/MusePad local host( Find instructions on the page The server will be hosted on Heroku soon)
+The application runs on a backend hosted on https://muse-pad.herokuapp.com
 
- Set up Android, and run through Android Studio
+Install the application via Android Studio. Before using the application ensure that you have an internet connection.
  
  Once You are all set up, sign up on the app and log in. 
  
