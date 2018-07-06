@@ -211,7 +211,7 @@ public class ApiCalls {
     }
 
 
-    public Boolean addNote(URL url, String entry, String item_name, String token) {
+    public void addNote(URL url, String entry, String item_name, String token,Context context) {
 
         NetworkInstance networkInstance = new NetworkInstance(url);
 
@@ -231,7 +231,9 @@ public class ApiCalls {
             String responseString = EntityUtils.toString(response.getEntity());
 
             if (responseString.contains("item has been added")) {
-                return true;
+                SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+                sharedPreferences.edit().putBoolean("AddNote",false);
+
             }
 
 
@@ -242,8 +244,6 @@ public class ApiCalls {
             e.printStackTrace();
 
         }
-
-        return false;
     }
 
     public Boolean editNote(URL url, String entry, String item_name, Context context) {

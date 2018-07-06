@@ -1,5 +1,6 @@
 package googlecodechallenge.sam.musepadpocket.views;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -53,12 +54,13 @@ public class AddNoteActivity extends AppCompatActivity implements View.OnClickLi
 
     private void saveNote(){
 
-        ApiCalls apiCalls = new ApiCalls();
-
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         String token = "Bearer ".concat(sharedPreferences.getString("token",""));
-        boolean addNoteState = apiCalls.addNote(initUrlBuilder(),et_note_entry.getText().toString(),
-                et_note_title_entry.getText().toString(),token);
+
+        saveNoteNetworkCall(token,this);
+
+       boolean addNoteState = sharedPreferences.getBoolean("AddNote",false);
+
         if(addNoteState){
             Intent intent = new Intent(this, MuseListActivity.class);
             startActivity(intent);
@@ -67,6 +69,21 @@ public class AddNoteActivity extends AppCompatActivity implements View.OnClickLi
         }
     }
 
+    private void saveNoteNetworkCall(String token, Context appContext){
+
+        final Context context = appContext;
+        final String accessToken = token;
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                ApiCalls apiCalls = new ApiCalls();
+                apiCalls.addNote(initUrlBuilder(),et_note_entry.getText().toString(),
+                        et_note_title_entry.getText().toString(),accessToken,context);
+            }
+        }).start();
+
+    }
     private URL initUrlBuilder() {
         String museId = extras.getString("Id");
         BuildUrls buildUrls = new BuildUrls(this);
