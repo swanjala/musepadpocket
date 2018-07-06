@@ -29,6 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import googlecodechallenge.sam.musepadpocket.R;
+import googlecodechallenge.sam.musepadpocket.views.AddMuseActivity;
 import googlecodechallenge.sam.musepadpocket.views.SignInActivity;
 
 /**
@@ -131,18 +132,18 @@ public class ApiCalls {
         return "";
     }
 
-    public boolean addMuse(URL url, String muse_name, String muse_description, Context context) {
+    public void addMuse(URL url, String muse_name, String muse_description, String token,Context context) {
 
         NetworkInstance networkInstance = new NetworkInstance(url);
         List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(3);
         nameValuePair.add(new BasicNameValuePair("name", muse_name));
         nameValuePair.add(new BasicNameValuePair("description", muse_description));
 
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-        String token = "Bearer ".concat(sharedPreferences.getString("token", ""));
+
+        String accessToken = "Bearer ".concat(token);
 
         try {
-            postObject = networkInstance.postMethodWithHeaders(token);
+            postObject = networkInstance.postMethodWithHeaders(accessToken);
             postObject.setEntity(new UrlEncodedFormEntity(nameValuePair));
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
@@ -151,9 +152,12 @@ public class ApiCalls {
         try {
             HttpResponse response = httpClient.execute(postObject);
             String responseString = EntityUtils.toString(response.getEntity());
-            if (responseString.contains(" success")) {
-
-                return true;
+            Log.d("response ",responseString);
+            if (responseString.equals("{\n" +
+                    "                \"message\": \""+muse_name+"\"Has been saved successfully\"\n" +
+                    "            }")) {
+                SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+                sharedPreferences.edit().putBoolean("addMuse",true).apply();
             }
         } catch (ClientProtocolException e) {
 
@@ -164,7 +168,7 @@ public class ApiCalls {
             e.printStackTrace();
         }
 
-        return false;
+
     }
 
     public JSONArray getMuseList(URL getMuseListUrl, Context context) {
