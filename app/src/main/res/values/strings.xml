@@ -26,4 +26,5 @@
     <string name="muse_title_input_hint">MuseTitle</string>
     <string name="muse_description_hint">Description</string>
     <string name="save_muse_bt_hint">Save Muse</string>
+    <string name="settings_label">Settings</string>
 </resources>
