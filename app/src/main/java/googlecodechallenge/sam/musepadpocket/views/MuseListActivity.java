@@ -9,6 +9,9 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -98,6 +101,22 @@ public class MuseListActivity extends AppCompatActivity  implements View.OnClick
         if(viewId == R.id.fb_add_muse){
             addMuse();
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.muse_list_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menuItem){
+        if (menuItem.getItemId()==R.id.muse_list_filter){
+            Toast.makeText(this,"This Filters",Toast.LENGTH_LONG).show();
+            return true;
+        }
+        return super.onOptionsItemSelected(menuItem);
     }
 
 
