@@ -8,4 +8,11 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="NightMode" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!--Customized theme for user night mode-->
+        <item name="colorPrimary">#222222</item>
+        <item name="colorPrimaryDark">#22e1e1e1</item>
+        <item name="colorAccent">#ffffff</item>
+    </style>
+
 </resources>
