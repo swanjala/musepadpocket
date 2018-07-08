@@ -29,7 +29,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import googlecodechallenge.sam.musepadpocket.R;
-import googlecodechallenge.sam.musepadpocket.views.AddMuseActivity;
 import googlecodechallenge.sam.musepadpocket.views.SignInActivity;
 
 /**
@@ -132,7 +131,7 @@ public class ApiCalls {
         return "";
     }
 
-    public void addMuse(URL url, String muse_name, String muse_description, String token,Context context) {
+    public void addMuse(URL url, String muse_name, String muse_description, String token, Context context) {
 
         NetworkInstance networkInstance = new NetworkInstance(url);
         List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(3);
@@ -152,12 +151,12 @@ public class ApiCalls {
         try {
             HttpResponse response = httpClient.execute(postObject);
             String responseString = EntityUtils.toString(response.getEntity());
-            Log.d("response ",responseString);
+            Log.d("response ", responseString);
             if (responseString.equals("{\n" +
-                    "                \"message\": \""+muse_name+"\"Has been saved successfully\"\n" +
+                    "                \"message\": \"" + muse_name + "\"Has been saved successfully\"\n" +
                     "            }")) {
                 SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-                sharedPreferences.edit().putBoolean("addMuse",true).apply();
+                sharedPreferences.edit().putBoolean("addMuse", true).apply();
             }
         } catch (ClientProtocolException e) {
 
@@ -211,7 +210,7 @@ public class ApiCalls {
     }
 
 
-    public void addNote(URL url, String entry, String item_name, String token,Context context) {
+    public void addNote(URL url, String entry, String item_name, String token, Context context) {
 
         NetworkInstance networkInstance = new NetworkInstance(url);
 
@@ -232,7 +231,7 @@ public class ApiCalls {
 
             if (responseString.contains("item has been added")) {
                 SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-                sharedPreferences.edit().putBoolean("AddNote",false);
+                sharedPreferences.edit().putBoolean("AddNote", false);
 
             }
 
@@ -246,18 +245,19 @@ public class ApiCalls {
         }
     }
 
-    public Boolean editNote(URL url, String entry, String item_name, Context context) {
+    public void editNote(URL url, String entry, String item_name, Context context) {
 
         NetworkInstance networkInstance = new NetworkInstance(url);
+        final SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
 
         List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(2);
         nameValuePair.add(new BasicNameValuePair("name", item_name));
         nameValuePair.add(new BasicNameValuePair("description", entry));
 
-        try {
-            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-            String token = "Bearer ".concat(sharedPreferences.getString("token", ""));
 
+        try {
+
+            String token = "Bearer ".concat(sharedPreferences.getString("token", ""));
             putObject = networkInstance.putMethodWithoutHeaders(token);
             putObject.setEntity(new UrlEncodedFormEntity(nameValuePair));
         } catch (UnsupportedEncodingException e) {
@@ -269,7 +269,7 @@ public class ApiCalls {
             String responseString = EntityUtils.toString(response.getEntity());
 
             if (responseString.contains("item has been updated")) {
-                return true;
+                sharedPreferences.edit().putBoolean("EditNote", true);
             }
 
 
@@ -281,7 +281,6 @@ public class ApiCalls {
 
         }
 
-        return false;
     }
 
 }
