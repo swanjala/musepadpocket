@@ -17,7 +17,8 @@ Install the application via Android Studio. Before using the application ensure 
 Signing in will lead you to the home screen which contains a list of your notes, and will be blank if you have none.
 on this screen, all your notes groups(Muses) will appear. Each muse contains a collection of related notes
 
-![screen2](https://user-images.githubusercontent.com/24252450/42351607-9586ea66-80be-11e8-9dda-1d01cd798b5a.png)
+![screen2](https://user-images.githubusercontent.com/24252450/42421711-c2e88cbe-82e2-11e8-916d-5bb9ad28da52.png)
+
 Once you open up your muse you will see all the notes within that group. You can create a new note by clicking 
 the floating button.
 
