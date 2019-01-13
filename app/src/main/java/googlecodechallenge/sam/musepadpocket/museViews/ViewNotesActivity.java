@@ -35,7 +35,6 @@ public class ViewNotesActivity extends AppCompatActivity implements View.OnClick
 
         initViewItems(this);
 
-
     }
 
     @Override
@@ -50,7 +49,6 @@ public class ViewNotesActivity extends AppCompatActivity implements View.OnClick
         super.onResume();
         initViewItems(this);
 
-        Log.d("Executing a seperte","Separate Logic");
     }
     private void initViewItems(Context context){
 
@@ -80,9 +78,6 @@ public class ViewNotesActivity extends AppCompatActivity implements View.OnClick
         this.mRecyclerView.setAdapter(mAdapter);
 
         this.mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-
-
-
 
     }
 
