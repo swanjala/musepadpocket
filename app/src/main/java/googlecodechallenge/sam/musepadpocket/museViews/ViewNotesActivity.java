@@ -1,4 +1,4 @@
-package googlecodechallenge.sam.musepadpocket.views;
+package googlecodechallenge.sam.musepadpocket.museViews;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,12 +10,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 
 import googlecodechallenge.sam.musepadpocket.R;
+import googlecodechallenge.sam.musepadpocket.adapters.MuseListItemsAdapter;
 
 /**
  * Created by sam on 7/1/18.

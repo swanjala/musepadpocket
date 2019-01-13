@@ -29,7 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import googlecodechallenge.sam.musepadpocket.R;
-import googlecodechallenge.sam.musepadpocket.views.SignInActivity;
+import googlecodechallenge.sam.musepadpocket.userViews.SignInActivity;
 
 /**
  * Created by sam on 7/1/18.

@@ -11,19 +11,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".views.SignInActivity">
+        <activity android:name=".userViews.SignInActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".views.RegisterActivity"/>
-        <activity android:name=".views.MuseListActivity"/>
-        <activity android:name=".views.ViewNotesActivity"/>
-        <activity android:name=".views.EditNoteActivity"/>
-        <activity android:name=".views.AddNoteActivity"/>
-        <activity android:name=".views.AddMuseActivity"/>
+        <activity android:name=".userViews.RegisterActivity"/>
+        <activity android:name=".museViews.MuseListActivity"/>
+        <activity android:name=".museViews.ViewNotesActivity"/>
+        <activity android:name=".museViews.EditNoteActivity"/>
+        <activity android:name=".museViews.AddNoteActivity"/>
+        <activity android:name=".museViews.AddMuseActivity"/>
     </application>
 
 </manifest>

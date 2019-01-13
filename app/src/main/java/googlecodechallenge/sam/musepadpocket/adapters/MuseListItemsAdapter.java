@@ -1,4 +1,4 @@
-package googlecodechallenge.sam.musepadpocket.views;
+package googlecodechallenge.sam.musepadpocket.adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,6 +13,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import googlecodechallenge.sam.musepadpocket.R;
+import googlecodechallenge.sam.musepadpocket.museViews.EditNoteActivity;
 
 /**
  * Creates an adapter that lists muses.
