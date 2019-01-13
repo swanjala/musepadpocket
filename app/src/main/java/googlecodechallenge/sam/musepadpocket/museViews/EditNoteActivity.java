@@ -1,4 +1,4 @@
-package googlecodechallenge.sam.musepadpocket.views;
+package googlecodechallenge.sam.musepadpocket.museViews;
 
 import android.content.Context;
 import android.content.SharedPreferences;

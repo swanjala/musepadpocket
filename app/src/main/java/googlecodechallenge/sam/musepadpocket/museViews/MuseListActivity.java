@@ -1,4 +1,4 @@
-package googlecodechallenge.sam.musepadpocket.views;
+package googlecodechallenge.sam.musepadpocket.museViews;
 
 import android.content.Context;
 import android.content.Intent;
@@ -20,6 +20,7 @@ import org.json.JSONArray;
 import java.net.URL;
 
 import googlecodechallenge.sam.musepadpocket.R;
+import googlecodechallenge.sam.musepadpocket.adapters.MuseListAdapter;
 import googlecodechallenge.sam.musepadpocket.networkutils.ApiCalls;
 import googlecodechallenge.sam.musepadpocket.networkutils.BuildUrls;
 

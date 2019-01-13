@@ -1,4 +1,4 @@
-package googlecodechallenge.sam.musepadpocket.views;
+package googlecodechallenge.sam.musepadpocket.adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,6 +13,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import googlecodechallenge.sam.musepadpocket.R;
+import googlecodechallenge.sam.musepadpocket.museViews.ViewNotesActivity;
 
 /**
  * Created by sam on 7/1/18.
@@ -36,9 +37,7 @@ public class MuseListAdapter extends
 
         View view = layoutInflater.inflate(R.layout.activity_muse_list_view_card_layout,
                 parent, false);
-
-        MuseListViewAdapter viewHolder = new MuseListViewAdapter(view);
-        return viewHolder;
+        return new MuseListViewAdapter(view);
 
     }
 
