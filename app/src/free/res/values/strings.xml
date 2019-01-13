@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name"></string>
+    <string name="title">Title</string>
+    <string name="my_notes">My Notes</string>
+    <string name="login_button_text">Login</string>
+    <string name="login_user_name_hint">Name</string>
+    <string name="sign_up_button_text">Sign Up</string>
+    <string name="time_signature_hint_value">9:00pm</string>
+    <string name="tv_day_display_hint">Thursday</string>
+    <string name="tv_display_entry_text_hint">Going out for a walk has never been this</string>
+    <string name="muse_base_url">https://muse-pad.herokuapp.com/api/v1</string>
+    <string name="login_base_url">auth/login</string>
+    <string name="static_muselist_url">muselists</string>
+    <string name="sign_up_url">auth/register</string>
+    <string name="error_logginin">You are not logged in, Try Again</string>
+    <string name="muse_added_successfully">New Muse has been created</string>
+    <string name="muse_not_added_successfully">Unable to add a new muse</string>
+    <string name="note_not_added">Unable to add a new Note</string>
+    <string name="muse_id">MuseId</string>
+    <string name="note_id">NoteId</string>
+    <string name="note_saved_successfully">Note saved successfully</string>
+    <string name="note_note_saved">Note not saved try again</string>
+    <string name="success_registration">Successfully Registered</string>
+    <string name="unable_to_register">Unable to Register</string>
+    <string name="unable_to_login">Unable to log you in</string>
+    <string name="muse_title_input_hint">MuseTitle</string>
+    <string name="muse_description_hint">Description</string>
+    <string name="save_muse_bt_hint">Save Muse</string>
+    <string name="settings_label">Settings</string>
+</resources>

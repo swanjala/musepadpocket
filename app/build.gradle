@@ -18,16 +18,20 @@ android {
     }
     useLibrary 'org.apache.http.legacy'
 
-    flavorDimensions "prod"
+    flavorDimensions "env"
     productFlavors {
-        production {
-            dimension "prod"
+        paid {
+            dimension "env"
             minSdkVersion 15
             applicationId 'googlecodechallenge.sam.musepadpocketprod'
             targetSdkVersion 27
             testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
             versionCode 1
             versionName '1.0'
+        }
+        free {
+            dimension "env"
+
         }
     }
 
