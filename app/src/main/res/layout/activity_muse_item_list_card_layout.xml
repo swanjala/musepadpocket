@@ -28,7 +28,8 @@
             android:hint="@string/tv_day_display_hint"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/bt_delete"
-            tools:layout_editor_absoluteY="16dp" />
+            tools:layout_editor_absoluteY="16dp"
+            android:layout_marginRight="112dp" />
 
         <TextView
             android:id="@+id/tv_items_display_entry_text"
@@ -38,7 +39,8 @@
             android:layout_marginTop="56dp"
             android:hint="@string/tv_display_entry_text_hint"
             app:layout_constraintEnd_toStartOf="@+id/bt_delete"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginRight="20dp" />
 
         <Button
             android:id="@+id/bt_delete"
@@ -48,7 +50,8 @@
             android:background="@drawable/ic_menu_delete"
             android:elevation="@dimen/bt_delete_elevation"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tv_display_entry_text" />
+            app:layout_constraintTop_toTopOf="@+id/tv_display_entry_text"
+            android:layout_marginRight="@dimen/bt_delete_margin_end" />
 
 
     </android.support.constraint.ConstraintLayout>

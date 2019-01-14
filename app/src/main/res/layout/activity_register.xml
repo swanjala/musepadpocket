@@ -32,7 +32,8 @@
         app:layout_constraintBottom_toTopOf="@+id/et_email"
         app:layout_constraintEnd_toEndOf="@+id/et_name"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/et_name" />
+        app:layout_constraintStart_toStartOf="@+id/et_name"
+        android:layout_marginLeft="8dp" />
 
     <EditText
         android:id="@+id/et_email"
@@ -46,7 +47,8 @@
         app:layout_constraintBottom_toTopOf="@+id/bt_register"
         app:layout_constraintEnd_toEndOf="@+id/et_password"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/et_password" />
+        app:layout_constraintStart_toStartOf="@+id/et_password"
+        android:layout_marginLeft="8dp" />
 
     <Button
         android:id="@+id/bt_register"
