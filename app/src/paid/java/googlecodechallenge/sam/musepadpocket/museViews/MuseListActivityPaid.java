@@ -28,8 +28,12 @@ import googlecodechallenge.sam.musepadpocket.networkutils.BuildUrls;
  * The main class displays all the muses from the api.
  */
 
-public class MuseListActivity extends AppCompatActivity  implements View.OnClickListener{
-  FloatingActionButton fb_add_new_muse;
+public class MuseListActivityPaid extends AppCompatActivity  implements View.OnClickListener{
+
+    @BindView(R.id.fb_add_muse)
+    FloatingActionButton fb_add_new_muse;
+    @BindView(R.id.rc_muse_list_viewer)
+    RecyclerView mRecyclerView;
 
     @Override
     protected void onCreate(Bundle onSavedInstanceState) {
@@ -53,11 +57,9 @@ public class MuseListActivity extends AppCompatActivity  implements View.OnClick
     }
 
     public void initViews(Context context) {
+        ButterKnife.bind(this);
 
-        fb_add_new_muse = findViewById(R.id.fb_add_muse);
         fb_add_new_muse.setOnClickListener(this);
-
-        RecyclerView mRecyclerView = findViewById(R.id.rc_muse_list_viewer);
         mRecyclerView.setHasFixedSize(true);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
