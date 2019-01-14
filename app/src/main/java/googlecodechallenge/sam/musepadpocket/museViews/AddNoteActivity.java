@@ -13,6 +13,8 @@ import android.widget.Toast;
 
 import java.net.URL;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import googlecodechallenge.sam.musepadpocket.R;
 import googlecodechallenge.sam.musepadpocket.networkutils.ApiCalls;
 import googlecodechallenge.sam.musepadpocket.networkutils.BuildUrls;
@@ -22,8 +24,16 @@ import googlecodechallenge.sam.musepadpocket.networkutils.BuildUrls;
  */
 
 public class AddNoteActivity extends AppCompatActivity implements View.OnClickListener {
+
+    @BindView(R.id.et_notes_input)
+    EditText et_note_entry;
+
+    @BindView(R.id.et_note_title)
+    EditText et_note_title_entry;
+
+    @BindView(R.id.bt_save_note)
     Button bt_addNote;
-    EditText et_note_entry, et_note_title_entry;
+
     private Bundle extras;
 
 
@@ -31,16 +41,10 @@ public class AddNoteActivity extends AppCompatActivity implements View.OnClickLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_new_note_layout);
-        initUi();
-        this.extras = getIntent().getExtras();
-
-    }
-
-    private void initUi() {
-        et_note_entry = findViewById(R.id.et_notes_input);
-        bt_addNote = findViewById(R.id.bt_save_note);
+        ButterKnife.bind(this);
         bt_addNote.setOnClickListener(this);
-        et_note_title_entry = findViewById(R.id.et_note_title);
+
+        this.extras = getIntent().getExtras();
 
     }
 
@@ -63,7 +67,7 @@ public class AddNoteActivity extends AppCompatActivity implements View.OnClickLi
         boolean addNoteState = sharedPreferences.getBoolean("AddNote", false);
 
         if (addNoteState) {
-            Intent intent = new Intent(this, MuseListActivity.class);
+            Intent intent = new Intent(this, MuseListActivityFree.class);
             startActivity(intent);
         } else {
             Toast.makeText(this, R.string.note_not_added, Toast.LENGTH_LONG).show();
