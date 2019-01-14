@@ -12,6 +12,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import googlecodechallenge.sam.musepadpocket.R;
 import googlecodechallenge.sam.musepadpocket.museViews.EditNoteActivity;
 
@@ -51,7 +53,13 @@ public class MuseListItemsAdapter extends RecyclerView.
     }
 
     class MuseListItemsViewAdapter extends RecyclerView.ViewHolder{
-        TextView tv_muse_item_name, tv_muse_item_date_created;
+
+        @BindView(R.id.tv_items_display_entry_text)
+        TextView tv_muse_item_name;
+
+        @BindView(R.id.tv_items_day_display)
+        TextView tv_muse_item_date_created;
+
         int position;
 
         private String museItemName;
@@ -62,9 +70,7 @@ public class MuseListItemsAdapter extends RecyclerView.
         private String noteId;
         public MuseListItemsViewAdapter(View musetItemListView){
             super(musetItemListView);
-
-            tv_muse_item_name = musetItemListView.findViewById(R.id.tv_items_display_entry_text);
-            tv_muse_item_date_created= musetItemListView.findViewById(R.id.tv_items_day_display);
+            ButterKnife.bind(this, musetItemListView);
         }
 
         public void setData(final JSONArray current, final int position){
