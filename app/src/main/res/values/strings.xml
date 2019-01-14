@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name"></string>
+    <string name="app_name">musepadpocket</string>
     <string name="title">Title</string>
     <string name="my_notes">My Notes</string>
     <string name="login_button_text">Login</string>
