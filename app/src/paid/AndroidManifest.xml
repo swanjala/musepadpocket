@@ -19,7 +19,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".userViews.RegisterActivity"/>
-        <activity android:name=".museViews.MuseListActivity"/>
+        <activity android:name=".museViews.MuseListActivityPaid"/>
         <activity android:name=".museViews.ViewNotesActivity"/>
         <activity android:name=".museViews.EditNoteActivity"/>
         <activity android:name=".museViews.AddNoteActivity"/>
