@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -12,6 +13,8 @@ import android.widget.Toast;
 
 import java.net.URL;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import googlecodechallenge.sam.musepadpocket.R;
 import googlecodechallenge.sam.musepadpocket.networkutils.ApiCalls;
 import googlecodechallenge.sam.musepadpocket.networkutils.BuildUrls;
@@ -22,19 +25,23 @@ import googlecodechallenge.sam.musepadpocket.networkutils.BuildUrls;
 
 public class EditNoteActivity extends AppCompatActivity implements View.OnClickListener {
 
+    @BindView(R.id.bt_save_note)
     Button bt_save_note;
+
+    @BindView(R.id.et_notes_input)
     EditText et_my_note_entry;
-    private String museId;
-    private String noteId;
+
+    @NonNull
+    private String museId = "";
+
+    @NonNull
+    private String noteId = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_new_note_layout);
-
-        et_my_note_entry = findViewById(R.id.et_notes_input);
-        bt_save_note = findViewById(R.id.bt_save_note);
-
+        ButterKnife.bind(this);
 
         final Bundle extras = getIntent().getExtras();
 

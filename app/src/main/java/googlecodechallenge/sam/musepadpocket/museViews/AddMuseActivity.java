@@ -13,6 +13,9 @@ import android.widget.Toast;
 
 import java.net.URL;
 
+import butterknife.BindDimen;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import googlecodechallenge.sam.musepadpocket.R;
 import googlecodechallenge.sam.musepadpocket.networkutils.ApiCalls;
 import googlecodechallenge.sam.musepadpocket.networkutils.BuildUrls;
@@ -22,25 +25,24 @@ import googlecodechallenge.sam.musepadpocket.networkutils.BuildUrls;
  */
 
 public class AddMuseActivity extends AppCompatActivity implements View.OnClickListener {
-    EditText et_add_new_muse_title, et_add_new_muse_description;
-    Button bt_add_new_muse_button;
 
+    @BindView(R.id.et_input_muse_title)
+    EditText et_add_new_muse_title;
+
+    @BindView(R.id.et_muse_description)
+    EditText et_add_new_muse_description;
+
+    @BindView(R.id.et_muse_description)
+    Button bt_add_new_muse_button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_muse_layout);
-        intiUi();
-
-    }
-
-    private void intiUi() {
-        et_add_new_muse_title = findViewById(R.id.et_input_muse_title);
-        et_add_new_muse_description = findViewById(R.id.et_muse_description);
-        bt_add_new_muse_button = findViewById(R.id.bt_add_new_muse);
+        ButterKnife.bind(this);
         bt_add_new_muse_button.setOnClickListener(this);
-    }
 
+    }
 
     @Override
     public void onClick(View view) {
@@ -52,7 +54,7 @@ public class AddMuseActivity extends AppCompatActivity implements View.OnClickLi
 
         if (addMuse) {
             Toast.makeText(this, R.string.muse_added_successfully, Toast.LENGTH_LONG).show();
-            Intent intent = new Intent(this, MuseListActivity.class);
+            Intent intent = new Intent(this, MuseListActivityFree.class);
             startActivity(intent);
         } else {
             Toast.makeText(this, R.string.muse_not_added_successfully, Toast.LENGTH_LONG).show();

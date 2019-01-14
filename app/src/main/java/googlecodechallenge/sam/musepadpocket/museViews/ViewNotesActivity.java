@@ -14,6 +14,7 @@ import android.view.View;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import butterknife.BindView;
 import googlecodechallenge.sam.musepadpocket.R;
 import googlecodechallenge.sam.musepadpocket.adapters.MuseListItemsAdapter;
 
@@ -23,9 +24,14 @@ import googlecodechallenge.sam.musepadpocket.adapters.MuseListItemsAdapter;
 
 public class ViewNotesActivity extends AppCompatActivity implements View.OnClickListener{
 
+
+    @BindView(R.id.fb_add_muse_notes)
     FloatingActionButton bt_add_new_note_item;
-    private Bundle extras;
+
+    @BindView(R.id.rc_muse_item_list_viewer)
     private RecyclerView mRecyclerView;
+
+    private Bundle extras;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -52,12 +58,7 @@ public class ViewNotesActivity extends AppCompatActivity implements View.OnClick
     }
     private void initViewItems(Context context){
 
-        bt_add_new_note_item =findViewById(R.id.fb_add_muse_notes);
-
         bt_add_new_note_item.setOnClickListener(this);
-
-        this.mRecyclerView = findViewById(R.id.rc_muse_item_list_viewer);
-
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
         this.mRecyclerView.setLayoutManager(mLayoutManager);
 

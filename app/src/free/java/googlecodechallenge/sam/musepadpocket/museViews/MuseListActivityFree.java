@@ -13,12 +13,15 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import org.json.JSONArray;
 
 import java.net.URL;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import googlecodechallenge.sam.musepadpocket.R;
 import googlecodechallenge.sam.musepadpocket.adapters.MuseListAdapter;
 import googlecodechallenge.sam.musepadpocket.networkutils.ApiCalls;
@@ -28,15 +31,20 @@ import googlecodechallenge.sam.musepadpocket.networkutils.BuildUrls;
  * The main class displays all the muses from the api.
  */
 
-public class MuseListActivity extends AppCompatActivity  implements View.OnClickListener{
+public class MuseListActivityFree extends AppCompatActivity  implements View.OnClickListener{
+
+  @BindView(R.id.fb_add_muse)
   FloatingActionButton fb_add_new_muse;
+  @BindView(R.id.rc_muse_list_viewer)
+  RecyclerView mRecyclerView;
+
 
     @Override
     protected void onCreate(Bundle onSavedInstanceState) {
         super.onCreate(onSavedInstanceState);
         setContentView(R.layout.activity_muse_list_layout);
+        ButterKnife.bind(this);
         initViews(this);
-
 
     }
 
@@ -54,10 +62,9 @@ public class MuseListActivity extends AppCompatActivity  implements View.OnClick
 
     public void initViews(Context context) {
 
-        fb_add_new_muse = findViewById(R.id.fb_add_muse);
+
         fb_add_new_muse.setOnClickListener(this);
 
-        RecyclerView mRecyclerView = findViewById(R.id.rc_muse_list_viewer);
         mRecyclerView.setHasFixedSize(true);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
@@ -76,8 +83,6 @@ public class MuseListActivity extends AppCompatActivity  implements View.OnClick
     private JSONArray getData() {
         ApiCalls apiCalls = new ApiCalls();
         JSONArray jsonArrayMuseData = apiCalls.getMuseList(initUrlBuilder(), this);
-
-        Log.d("Data", String.valueOf(jsonArrayMuseData));
         return jsonArrayMuseData;
     }
 
@@ -114,7 +119,6 @@ public class MuseListActivity extends AppCompatActivity  implements View.OnClick
     @Override
     public boolean onOptionsItemSelected(MenuItem menuItem){
         if (menuItem.getItemId()==R.id.muse_list_filter){
-            Toast.makeText(this,"This Filters",Toast.LENGTH_LONG).show();
             return true;
         }
         return super.onOptionsItemSelected(menuItem);

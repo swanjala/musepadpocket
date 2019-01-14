@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.StrictMode;
 import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,10 +15,12 @@ import android.widget.Toast;
 
 import java.net.URL;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import googlecodechallenge.sam.musepadpocket.R;
 import googlecodechallenge.sam.musepadpocket.networkutils.ApiCalls;
 import googlecodechallenge.sam.musepadpocket.networkutils.BuildUrls;
-import googlecodechallenge.sam.musepadpocket.museViews.MuseListActivity;
+import googlecodechallenge.sam.musepadpocket.museViews.MuseListActivityFree;
 
 /*
 * Class lets the user sign into the application
@@ -25,20 +28,26 @@ import googlecodechallenge.sam.musepadpocket.museViews.MuseListActivity;
 
 public class SignInActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private Button signup,bt_login_user;
-    private String userName, password;
-    private EditText et_user_name_input, et_password_input;
+    @BindView(R.id.bt_signup)
+    Button signup;
+    @BindView(R.id.bt_login)
+    Button bt_login_user;
+    @BindView(R.id.et_user_name)
+    EditText et_user_name_input;
+    @BindView(R.id.et_password)
+    EditText et_password_input;
+
+    @NonNull
+    private String userName = "",
+            password="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        signup = findViewById(R.id.bt_signup);
-        et_user_name_input = findViewById(R.id.et_user_name);
-        et_password_input = findViewById(R.id.et_password);
+
+        ButterKnife.bind(this);
         signup.setOnClickListener(this);
-        bt_login_user = findViewById(R.id.bt_login);
-        bt_login_user.setOnClickListener(this);
 
         StrictMode.ThreadPolicy policy =new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
@@ -78,7 +87,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         }else {
             SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
             sp.edit().putString("token", successToken).apply();
-            Intent intent = new Intent(this, MuseListActivity.class);
+            Intent intent = new Intent(this, MuseListActivityFree.class);
             intent.putExtra("Token",successToken);
 
 

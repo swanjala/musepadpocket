@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".museViews.MuseListActivityPaid"
-
     >
 
     <android.support.v7.widget.RecyclerView
@@ -22,8 +21,10 @@
         android:layout_marginBottom="@dimen/fab_margin_bottom"
         android:layout_marginRight="@dimen/fab_margin_right"
         android:background="@color/colorAccent"
-        android:elevation="@dimen/fab_elevation"
+        android:elevation="8dp"
         android:src="@drawable/ic_add"
+
+
         app:fabSize="normal"
         tools:layout_editor_absoluteX="297dp"
         tools:layout_editor_absoluteY="420dp" />
