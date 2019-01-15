@@ -19,8 +19,7 @@ import googlecodechallenge.sam.musepadpocket.adapters.MuseListAdapter;
 
 public class MuseListFragment extends Fragment {
 
-//    @BindView(R.id.rc_muse_item_list_viewer)
-//    RecyclerView recyclerView;
+
     private JSONArray museData;
     private static final String MUSE_DATA ="DataDetails";
 
