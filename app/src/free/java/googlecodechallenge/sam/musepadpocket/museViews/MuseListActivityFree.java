@@ -1,5 +1,6 @@
 package googlecodechallenge.sam.musepadpocket.museViews;
 
+import android.support.v4.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -24,6 +25,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import googlecodechallenge.sam.musepadpocket.R;
 import googlecodechallenge.sam.musepadpocket.adapters.MuseListAdapter;
+import googlecodechallenge.sam.musepadpocket.fragments.MuseListFragment;
 import googlecodechallenge.sam.musepadpocket.networkutils.ApiCalls;
 import googlecodechallenge.sam.musepadpocket.networkutils.BuildUrls;
 
@@ -33,18 +35,30 @@ import googlecodechallenge.sam.musepadpocket.networkutils.BuildUrls;
 
 public class MuseListActivityFree extends AppCompatActivity  implements View.OnClickListener{
 
-  @BindView(R.id.fb_add_muse)
-  FloatingActionButton fb_add_new_muse;
-  @BindView(R.id.rc_muse_list_viewer)
-  RecyclerView mRecyclerView;
+    public static final String DATA = "DataDetails";
+
+    private FragmentManager fragmentManager =
+            getSupportFragmentManager();
 
 
     @Override
     protected void onCreate(Bundle onSavedInstanceState) {
         super.onCreate(onSavedInstanceState);
         setContentView(R.layout.activity_muse_list_layout);
-        ButterKnife.bind(this);
-        initViews(this);
+        Bundle bundle = new Bundle();
+
+        JSONArray data = getData();
+
+        if(fragmentManager.getBackStackEntryCount() == 0
+                && onSavedInstanceState == null ){
+            MuseListFragment museListFragment = new MuseListFragment();
+            bundle.putParcelable(DATA,data);
+            museListFragment.setArguments(bundle);
+            fragmentManager.beginTransaction()
+                    .add(R.id.listContainer, museListFragment)
+                    .commit();
+        }
+
 
     }
 
@@ -57,28 +71,7 @@ public class MuseListActivityFree extends AppCompatActivity  implements View.OnC
     @Override
     protected void onResume() {
         super.onResume();
-        initViews(this);
     }
-
-    public void initViews(Context context) {
-
-
-        fb_add_new_muse.setOnClickListener(this);
-
-        mRecyclerView.setHasFixedSize(true);
-
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(mLayoutManager);
-
-        JSONArray data = getData();
-        RecyclerView.Adapter mAdapter = new MuseListAdapter(context, data);
-
-        mRecyclerView.setAdapter(mAdapter);
-
-        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-
-    }
-
 
     private JSONArray getData() {
         ApiCalls apiCalls = new ApiCalls();
