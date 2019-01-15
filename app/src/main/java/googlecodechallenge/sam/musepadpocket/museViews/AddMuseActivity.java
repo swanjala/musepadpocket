@@ -16,6 +16,7 @@ import java.net.URL;
 import butterknife.BindDimen;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import googlecodechallenge.sam.musepadpocket.R;
 import googlecodechallenge.sam.musepadpocket.networkutils.ApiCalls;
 import googlecodechallenge.sam.musepadpocket.networkutils.BuildUrls;
@@ -40,11 +41,9 @@ public class AddMuseActivity extends AppCompatActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_muse_layout);
         ButterKnife.bind(this);
-        bt_add_new_muse_button.setOnClickListener(this);
-
     }
 
-    @Override
+    @OnClick(R.id.bt_add_new_muse)
     public void onClick(View view) {
         SharedPreferences sharedPreferences = PreferenceManager
                 .getDefaultSharedPreferences(this);
