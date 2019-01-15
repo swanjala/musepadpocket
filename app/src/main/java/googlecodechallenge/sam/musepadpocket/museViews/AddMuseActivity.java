@@ -32,7 +32,7 @@ public class AddMuseActivity extends AppCompatActivity implements View.OnClickLi
     @BindView(R.id.et_muse_description)
     EditText et_add_new_muse_description;
 
-    @BindView(R.id.et_muse_description)
+    @BindView(R.id.bt_add_new_muse)
     Button bt_add_new_muse_button;
 
     @Override
