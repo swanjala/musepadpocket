@@ -19,7 +19,7 @@ public class MuseModel  {
     private Integer id;
     @SerializedName("items")
     @Expose
-    private List<Item> items = null;
+    private List<ItemModel> items = null;
     @SerializedName("name")
     @Expose
     private String name;
