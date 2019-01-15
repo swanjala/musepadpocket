@@ -15,6 +15,7 @@ import java.net.URL;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import googlecodechallenge.sam.musepadpocket.R;
 import googlecodechallenge.sam.musepadpocket.networkutils.ApiCalls;
 import googlecodechallenge.sam.musepadpocket.networkutils.BuildUrls;
@@ -42,13 +43,12 @@ public class AddNoteActivity extends AppCompatActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_new_note_layout);
         ButterKnife.bind(this);
-        bt_addNote.setOnClickListener(this);
 
         this.extras = getIntent().getExtras();
 
     }
 
-    @Override
+    @OnClick(R.id.bt_save_note)
     public void onClick(View view) {
         int viewId = view.getId();
 
