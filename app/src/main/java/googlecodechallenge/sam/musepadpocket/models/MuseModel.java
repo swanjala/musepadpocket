@@ -52,7 +52,7 @@ public class MuseModel  {
         return items;
     }
 
-    public void setItems(List<Item> items) {
+    public void setItems(List<ItemModel> items) {
         this.items = items;
     }
 
@@ -65,4 +65,4 @@ public class MuseModel  {
     }
 
 }
-}
+
