@@ -29,7 +29,7 @@ public class ViewNotesActivity extends AppCompatActivity implements View.OnClick
     FloatingActionButton bt_add_new_note_item;
 
     @BindView(R.id.rc_muse_item_list_viewer)
-    private RecyclerView mRecyclerView;
+    RecyclerView mRecyclerView;
 
     private Bundle extras;
 
