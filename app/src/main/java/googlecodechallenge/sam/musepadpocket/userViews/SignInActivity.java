@@ -17,6 +17,7 @@ import java.net.URL;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import googlecodechallenge.sam.musepadpocket.R;
 import googlecodechallenge.sam.musepadpocket.networkutils.ApiCalls;
 import googlecodechallenge.sam.musepadpocket.networkutils.BuildUrls;
@@ -54,7 +55,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
 
     }
 
-    @Override
+    @OnClick(R.id.bt_login)
     public void onClick(View v){
         int viewId = v.getId();
         if (viewId ==R.id.bt_signup){
