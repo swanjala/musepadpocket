@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -14,6 +15,7 @@ import org.json.JSONObject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import googlecodechallenge.sam.musepadpocket.R;
 import googlecodechallenge.sam.musepadpocket.museViews.EditNoteActivity;
 
@@ -85,31 +87,28 @@ public class MuseListItemsAdapter extends RecyclerView.
                     e.printStackTrace();
                 }
                 this.tv_muse_item_name.setText(museItemName);
-                tv_muse_item_name.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Intent intent = new Intent(context, EditNoteActivity.class);
-                        try {
-                            description = data.getString("item_description");
-                            museId =data.getString("muse_id");
-                            noteId = data.getString("id");
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
-                            intent.putExtra("Description",description);
-                            intent.putExtra("MuseId",museId);
-                            intent.putExtra("NoteId",noteId);
-
-
-
-                        context.startActivity(intent);
-                    }
-                });
                 this.tv_muse_item_date_created.setText(museItemName);
 
                 this.position = position;
 
+
+            }
+
+            @OnClick(R.id.tv_items_display_entry_text)
+            public void onClick(){
+                Intent intent = new Intent(context, EditNoteActivity.class);
+                try{
+                    description = data.getString("item_description");
+                    museId = data.getString("muse_id");
+                    noteId = data.getString("id");
+                } catch (JSONException e){
+                    e.printStackTrace();
+                }
+                intent.putExtra("Description", description);
+                intent.putExtra("MuseId", museId);
+                intent.putExtra("NoteId",noteId);
+
+                context.startActivity(intent);
 
             }
         }
