@@ -15,6 +15,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import googlecodechallenge.sam.musepadpocket.R;
 import googlecodechallenge.sam.musepadpocket.adapters.MuseListItemsAdapter;
 
@@ -39,7 +41,7 @@ public class ViewNotesActivity extends AppCompatActivity implements View.OnClick
         setContentView(R.layout.activity_view_notes);
         this.extras = getIntent().getExtras();
 
-        initViewItems(this);
+        initViewItems();
 
     }
 
@@ -53,14 +55,13 @@ public class ViewNotesActivity extends AppCompatActivity implements View.OnClick
     @Override
     protected void onResume(){
         super.onResume();
-        initViewItems(this);
+        initViewItems();
 
     }
-    private void initViewItems(Context context){
-
-        bt_add_new_note_item.setOnClickListener(this);
+    private void initViewItems(){
+        ButterKnife.bind(this);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
-        this.mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.setLayoutManager(mLayoutManager);
 
         getData();
     }
@@ -82,7 +83,7 @@ public class ViewNotesActivity extends AppCompatActivity implements View.OnClick
 
     }
 
-    @Override
+    @OnClick(R.id.fb_add_muse_notes)
     public void onClick(View view){
         int viewId = view.getId();
         if (viewId == R.id.fb_add_muse_notes){
