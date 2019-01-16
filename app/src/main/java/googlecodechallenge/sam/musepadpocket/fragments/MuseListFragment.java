@@ -10,18 +10,27 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
-import org.json.JSONArray;
+import java.util.ArrayList;
 
-import butterknife.BindView;
 import googlecodechallenge.sam.musepadpocket.R;
-import googlecodechallenge.sam.musepadpocket.adapters.MuseListAdapter;
+import googlecodechallenge.sam.musepadpocket.models.MuseModel;
 
 public class MuseListFragment extends Fragment {
 
 
-    private JSONArray museData;
+    private ArrayList<MuseModel> museData;
     private static final String MUSE_DATA ="DataDetails";
+
+    MuseListFragment.OnMuseListLoadedListener museListLoadedListener;
+
+    public interface  OnMuseListLoadedListener{
+        void onLoadMuseLists(ArrayList<MuseModel> data);
+    }
+    public MuseListFragment(){
+
+    }
 
     @Override
     public void onAttach(Context context) {
@@ -31,17 +40,19 @@ public class MuseListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup container,
                              Bundle savedInstanceState){
+
         final View rootView = layoutInflater.inflate(R.layout.fragment_muse_list,
                 container,false);
 
-        final RecyclerView recyclerView = rootView.findViewById(R.id.rc_muse_item_list_viewer);
+        final RecyclerView recyclerView = rootView.findViewById(R.id.rc_muse_list_viewer);
         Bundle bundle = this.getArguments();
 
-        museData = (JSONArray) bundle.get(MUSE_DATA);
+        if (bundle != null) {
+            museData = bundle.getParcelableArrayList(MUSE_DATA);
+        }
 
-        MuseListAdapter museListAdapter = new MuseListAdapter(getContext(),
-                museData);
-        recyclerView.setAdapter(museListAdapter);
+        FragmentAdapter fragmentAdapter = new FragmentAdapter(museData);
+        recyclerView.setAdapter(fragmentAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         FloatingActionButton floatingActionButton = rootView.findViewById(
@@ -59,6 +70,51 @@ public class MuseListFragment extends Fragment {
 
 
         return rootView;
+
+    }
+
+    public class FragmentAdapter extends
+            RecyclerView.Adapter<FragmentAdapter.ViewHolder> {
+
+        private ArrayList<MuseModel> mDataSet;
+        private LayoutInflater layoutInflater;
+        private Context context;
+
+        public FragmentAdapter(ArrayList<MuseModel> data){
+            this.mDataSet = data;
+        }
+        public class ViewHolder extends RecyclerView.ViewHolder {
+            TextView tv_muse_name;
+
+            TextView tv_date_created;
+
+            public ViewHolder(View itemView){
+
+                super(itemView);
+                this.tv_muse_name = itemView.findViewById(R.id.tv_display_entry_text);
+                this.tv_date_created = itemView.findViewById(R.id.tv_items_day_display);
+            }
+
+        }
+        @Override
+        public FragmentAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
+            View view = layoutInflater.inflate(R.layout.activity_muse_list_view_card_layout,
+                    parent, false);
+            return new ViewHolder(view);
+        }
+
+        @Override
+        public void onBindViewHolder(FragmentAdapter.ViewHolder holder,
+                                     int position){
+            holder.tv_muse_name.setText(String.valueOf(mDataSet.get(position).getName()));
+            holder.tv_date_created.setText(String.valueOf(mDataSet.get(position).getDateCreated()));
+            museListLoadedListener.onLoadMuseLists(museData);
+        }
+
+        @Override
+        public int getItemCount() {
+            return mDataSet.size();
+        }
 
     }
 
