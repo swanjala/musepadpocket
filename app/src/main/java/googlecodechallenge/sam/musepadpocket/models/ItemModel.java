@@ -29,6 +29,10 @@ public class ItemModel {
     @Expose
     private String name;
 
+    public ItemModel(String name ){
+        this.name = name;
+    }
+
     public String getDateCreated() {
         return dateCreated;
     }
