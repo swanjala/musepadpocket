@@ -2,6 +2,7 @@ package googlecodechallenge.sam.musepadpocket.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Parcelable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,9 +13,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import googlecodechallenge.sam.musepadpocket.R;
+import googlecodechallenge.sam.musepadpocket.models.MuseModel;
 import googlecodechallenge.sam.musepadpocket.museViews.ViewNotesActivity;
 
 /**
@@ -24,11 +28,11 @@ import googlecodechallenge.sam.musepadpocket.museViews.ViewNotesActivity;
 public class MuseListAdapter extends
         RecyclerView.Adapter<MuseListAdapter.MuseListViewAdapter> {
 
-    private JSONArray mDataSet;
+    private ArrayList<MuseModel> mDataSet;
     private LayoutInflater layoutInflater;
     private Context context;
 
-    public MuseListAdapter(Context context, JSONArray museDataJsonArray) {
+    public MuseListAdapter(Context context, ArrayList<MuseModel> museDataJsonArray) {
         mDataSet = museDataJsonArray;
         this.layoutInflater = LayoutInflater.from(context);
         this.context = context;
@@ -53,7 +57,7 @@ public class MuseListAdapter extends
 
     @Override
     public int getItemCount() {
-        return mDataSet.length();
+        return mDataSet.size();
 
     }
 
@@ -70,7 +74,7 @@ public class MuseListAdapter extends
 
         private String museName;
         private String museDate;
-        private JSONObject data;
+        private MuseModel data;
 
 
      public MuseListViewAdapter(View museListView) {
@@ -81,28 +85,21 @@ public class MuseListAdapter extends
 
      }
 
-     public void setData(final JSONArray current, final int position) {
+     public void setData(final ArrayList<MuseModel> current, final int position) {
 
-         try {
-             this.data =  current.getJSONObject(position);
+         this.data =  current.get(position);
 
-             this.museName = data.getString("name");
-             this.museDate = data.getString("date_created");
+         this.museName = data.getName();
 
-         } catch (JSONException e) {
-             e.printStackTrace();
-         }
+         this.museDate = data.getDateCreated();
+
          this.tv_muse_name.setText(museName);
          tv_muse_name.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View view) {
                  Intent intent = new Intent(context,ViewNotesActivity.class);
-                 try {
-                     intent.putExtra("Data",data.getString("items"));
-                     intent.putExtra("Id",data.getString("id"));
-                 } catch (JSONException e) {
-                     e.printStackTrace();
-                 }
+                 intent.putExtra("Data", data.getItems());
+                 intent.putExtra("Id",data.getId());
                  context.startActivity(intent);
              }
          });
