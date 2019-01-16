@@ -25,10 +25,10 @@ public interface INetwork {
     Call<ArrayList<MuseModel>> getMuselist();
 
     @POST("auth/register")
-    Call<UserModel> registarUser(@Body UserModel userDetails);
+    Call<UserModel> registerUser(@Body UserModel userDetails);
 
     @POST("muselists/{id}/items?limit=1000")
-    Call<ItemModel> addIterms(@Path("id")String id, @Body ItemModel name);
+    Call<ItemModel> addItems(@Path("id")String id, @Body ItemModel name);
 
     @DELETE("muselists/{id}")
     Call<DeleteMuse> deleteMuseList(@Path("id") String id);
