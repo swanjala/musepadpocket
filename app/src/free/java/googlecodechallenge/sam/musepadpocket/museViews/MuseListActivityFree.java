@@ -1,33 +1,26 @@
 package googlecodechallenge.sam.musepadpocket.museViews;
 
-import android.support.v4.app.FragmentManager;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
-
-import org.json.JSONArray;
 
 import java.net.URL;
+import java.util.ArrayList;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import googlecodechallenge.sam.musepadpocket.R;
-import googlecodechallenge.sam.musepadpocket.adapters.MuseListAdapter;
+import googlecodechallenge.sam.musepadpocket.api.ApiManager;
 import googlecodechallenge.sam.musepadpocket.fragments.MuseListFragment;
-import googlecodechallenge.sam.musepadpocket.networkutils.ApiCalls;
+import googlecodechallenge.sam.musepadpocket.models.MuseModel;
 import googlecodechallenge.sam.musepadpocket.networkutils.BuildUrls;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * The main class displays all the muses from the api.
@@ -41,24 +34,25 @@ public class MuseListActivityFree extends AppCompatActivity  implements View.OnC
             getSupportFragmentManager();
 
 
+    private ArrayList<MuseModel> museModelData = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle onSavedInstanceState) {
         super.onCreate(onSavedInstanceState);
         setContentView(R.layout.activity_muse_list_layout);
         Bundle bundle = new Bundle();
 
-        JSONArray data = getData();
+        getData();
 
         if(fragmentManager.getBackStackEntryCount() == 0
                 && onSavedInstanceState == null ){
             MuseListFragment museListFragment = new MuseListFragment();
-            bundle.putParcelable(DATA,data);
+            bundle.putParcelableArrayList(DATA,museModelData);
             museListFragment.setArguments(bundle);
             fragmentManager.beginTransaction()
                     .add(R.id.listContainer, museListFragment)
                     .commit();
         }
-
 
     }
 
@@ -73,10 +67,25 @@ public class MuseListActivityFree extends AppCompatActivity  implements View.OnC
         super.onResume();
     }
 
-    private JSONArray getData() {
-        ApiCalls apiCalls = new ApiCalls();
-        JSONArray jsonArrayMuseData = apiCalls.getMuseList(initUrlBuilder(), this);
-        return jsonArrayMuseData;
+    private void getData() {
+
+
+        Call<ArrayList<MuseModel>> call = new ApiManager(this)
+                .getMuseLists();
+        call.enqueue(new Callback<ArrayList<MuseModel>>() {
+            @Override
+            public void onResponse(Call<ArrayList<MuseModel>> call, Response<ArrayList<MuseModel>> response) {
+                museModelData.addAll(response.body());
+
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<MuseModel>> call, Throwable t) {
+                Log.d("Error","Data Not loaded");
+            }
+        });
+
+
     }
 
     private void addMuse(){
