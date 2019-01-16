@@ -8,7 +8,7 @@
     <string name="time_signature_hint_value">9:00pm</string>
     <string name="tv_day_display_hint">Thursday</string>
     <string name="tv_display_entry_text_hint">Going out for a walk has never been this</string>
-    <string name="muse_base_url">https://muse-pad.herokuapp.com/api/v1</string>
+    <string name="muse_base_url">https://muse-pad.herokuapp.com/api/v1/</string>
     <string name="login_base_url">auth/login</string>
     <string name="static_muselist_url">muselists</string>
     <string name="sign_up_url">auth/register</string>
