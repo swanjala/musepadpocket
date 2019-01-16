@@ -50,6 +50,10 @@ android {
         }
     }
 
+    dataBinding{
+        enabled = true;
+    }
+
 
 }
 
