@@ -8,6 +8,17 @@ public class UserModel {
 
     private String userName,password, email;
 
+    public UserModel(String userName, String password){
+        this.userName = userName;
+        this.password = password;
+    }
+    public UserModel(String userName, String password, String email){
+        this.userName = userName;
+        this.password = password;
+        this.email = email;
+    }
+    public UserModel() {}
+
     public void setEmail(String email) {
         this.email = email;
     }
