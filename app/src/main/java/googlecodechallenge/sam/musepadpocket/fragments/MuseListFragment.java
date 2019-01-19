@@ -7,10 +7,12 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -38,7 +40,7 @@ public class MuseListFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater layoutInflater, ViewGroup container,
+    public View onCreateView(LayoutInflater layoutInflater, final ViewGroup container,
                              Bundle savedInstanceState){
 
         final View rootView = layoutInflater.inflate(R.layout.fragment_muse_list,
@@ -65,6 +67,8 @@ public class MuseListFragment extends Fragment {
                 if (fragmentManager.getBackStackEntryCount() > 0){
                     fragmentManager.popBackStack();
                 }
+
+                Toast.makeText(getContext(),"This is somethings",Toast.LENGTH_LONG).show();
             }
         });
 
@@ -113,7 +117,7 @@ public class MuseListFragment extends Fragment {
 
         @Override
         public int getItemCount() {
-            return mDataSet.size();
+          return mDataSet.size();
         }
 
     }
