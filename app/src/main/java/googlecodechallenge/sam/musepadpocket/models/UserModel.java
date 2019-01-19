@@ -6,7 +6,7 @@ package googlecodechallenge.sam.musepadpocket.models;
 
 public class UserModel {
 
-    private String userName,password, email;
+    private String userName,password, email,token;
 
     public UserModel(String userName, String password){
         this.userName = userName;
@@ -29,6 +29,12 @@ public class UserModel {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+    public void setToken(String token){
+        this.token = token;
+    }
+    public String getToken(){
+        return token;
     }
 
     public String getEmail() {
