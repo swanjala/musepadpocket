@@ -1,16 +1,16 @@
 package googlecodechallenge.sam.musepadpocket.api;
 
-import googlecodechallenge.sam.musepadpocket.networkutils.INetwork;
-
 public class ApiCallInstance {
-    private INetwork iNetwork;
+    private ApiInterface apiInterface;
+
     private String url;
 
-    public INetwork getiNetwork(){
-        return this.iNetwork;
+    public ApiInterface getApiInterface(){
+
+        return this.apiInterface;
     }
-    public  void setiNetwork(INetwork iNetwork){
-        this.iNetwork = iNetwork;
+    public  void setApiInterface(ApiInterface apiInterface){
+        this.apiInterface = apiInterface;
     }
     public String getUrl() {
         return this.url;
