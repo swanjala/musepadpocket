@@ -26,33 +26,20 @@ import retrofit2.Response;
  * The main class displays all the muses from the api.
  */
 
-public class MuseListActivityFree extends AppCompatActivity  implements View.OnClickListener{
+public class MuseListActivityFree extends AppCompatActivity  implements View.OnClickListener {
 
     public static final String DATA = "DataDetails";
 
     private FragmentManager fragmentManager =
             getSupportFragmentManager();
-
-
     private ArrayList<MuseModel> museModelData = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle onSavedInstanceState) {
         super.onCreate(onSavedInstanceState);
         setContentView(R.layout.activity_muse_list_layout);
-        Bundle bundle = new Bundle();
 
-        getData();
-
-        if(fragmentManager.getBackStackEntryCount() == 0
-                && onSavedInstanceState == null ){
-            MuseListFragment museListFragment = new MuseListFragment();
-            bundle.putParcelableArrayList(DATA,museModelData);
-            museListFragment.setArguments(bundle);
-            fragmentManager.beginTransaction()
-                    .add(R.id.listContainer, museListFragment)
-                    .commit();
-        }
+        getViewModel();
 
     }
 
@@ -67,15 +54,36 @@ public class MuseListActivityFree extends AppCompatActivity  implements View.OnC
         super.onResume();
     }
 
-    private void getData() {
 
+    private void addMuse(){
+       Intent intent = new Intent(this, AddMuseActivity.class);
+       startActivity(intent);
 
-        Call<ArrayList<MuseModel>> call = new ApiManager(this)
+    }
+
+    public void getViewModel() {
+
+        Call<ArrayList<MuseModel>> call = new ApiManager(this,
+                getResources().getString(R.string.muse_base_url))
                 .getMuseLists();
         call.enqueue(new Callback<ArrayList<MuseModel>>() {
+
             @Override
             public void onResponse(Call<ArrayList<MuseModel>> call, Response<ArrayList<MuseModel>> response) {
-                museModelData.addAll(response.body());
+                ArrayList<MuseModel> museListData = new ArrayList<>();
+
+                museListData.addAll(response.body());
+
+                Log.d("response goes here ",museListData.get(0).getName());
+                if(fragmentManager.getBackStackEntryCount() == 0 && museModelData != null){
+                    MuseListFragment museListFragment = new MuseListFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putParcelableArrayList(DATA,museModelData);
+                    museListFragment.setArguments(bundle);
+                    fragmentManager.beginTransaction()
+                            .add(R.id.listContainer, museListFragment)
+                            .commitAllowingStateLoss();
+                }
 
             }
 
@@ -84,13 +92,6 @@ public class MuseListActivityFree extends AppCompatActivity  implements View.OnC
                 Log.d("Error","Data Not loaded");
             }
         });
-
-
-    }
-
-    private void addMuse(){
-       Intent intent = new Intent(this, AddMuseActivity.class);
-       startActivity(intent);
 
     }
 
