@@ -9,7 +9,7 @@ import com.google.gson.GsonBuilder;
 
 import java.io.IOException;
 
-import googlecodechallenge.sam.musepadpocket.networkutils.INetwork;
+import googlecodechallenge.sam.musepadpocket.api.ApiInterface;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -19,7 +19,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitInstance {
 
-    public static INetwork retrofitInstance(String url, Context context){
+    public static ApiInterface retrofitInstance(String url, Context context){
 
         final SharedPreferences sharedPreferences = PreferenceManager
                 .getDefaultSharedPreferences(context);
@@ -51,6 +51,6 @@ public class RetrofitInstance {
                 .client(client);
         Retrofit retrofit = retrofitBuilder.build();
 
-        return retrofit.create(INetwork.class);
+        return retrofit.create(ApiInterface.class);
     }
 }

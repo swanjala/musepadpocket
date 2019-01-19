@@ -2,13 +2,14 @@ package googlecodechallenge.sam.musepadpocket.api;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.text.LoginFilter;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import googlecodechallenge.sam.musepadpocket.R;
 import googlecodechallenge.sam.musepadpocket.models.DeleteMuse;
 import googlecodechallenge.sam.musepadpocket.models.ItemModel;
+import googlecodechallenge.sam.musepadpocket.models.LoginModel;
 import googlecodechallenge.sam.musepadpocket.models.MuseModel;
 import googlecodechallenge.sam.musepadpocket.models.UserModel;
 import googlecodechallenge.sam.musepadpocket.networkutils.RetrofitInstance;
@@ -25,11 +26,8 @@ public class ApiManager {
 
     ApiCallInstance apiCallInstance = new ApiCallInstance();
 
-    public ApiManager(Context context){
-        this.url = context.getResources()
-                .getString(R.string.muse_base_url);
-        this.apiCallInstance.setiNetwork(RetrofitInstance
-                .retrofitInstance(this.url, context));
+    public ApiManager(Context context, String url){
+        this.url =url;
         this.context = context;
     }
 
@@ -40,7 +38,7 @@ public class ApiManager {
 
         this.url = context.getResources().getString(R.string.muse_base_url);
         this.context =context;
-        this.apiCallInstance.setiNetwork(RetrofitInstance.retrofitInstance(url,
+        this.apiCallInstance.setApiInterface(RetrofitInstance.retrofitInstance(url,
                 context));
     }
 
@@ -53,18 +51,28 @@ public class ApiManager {
 
     }
 
-    @NonNull
-    public Call<UserModel> login() {
-
-        return apiCallInstance.getiNetwork()
-                .login(new UserModel(userModel.getUserName(),
-                userModel.getPassword()));
+    public ApiManager(String name, String password, Context context,
+                      String url){
+        this.username = name;
+        this.password = password;
+        this.url = url;
+        this.context = context;
     }
 
-    @NonNull
+    public Call<UserModel> login() {
+
+        this.apiCallInstance.setApiInterface(RetrofitInstance
+                .retrofitInstance(this.url,context));
+
+        LoginModel loginModel = new LoginModel(this.username,this.password);
+
+        return apiCallInstance.getApiInterface()
+                .login(loginModel);
+    }
+
     public Call<UserModel> registerUser(String username, String password,
                                         String email){
-        return apiCallInstance.getiNetwork()
+        return apiCallInstance.getApiInterface()
                 .registerUser(new UserModel(username, password, email));
 
     }
@@ -72,14 +80,14 @@ public class ApiManager {
     @NonNull
     public Call<MuseModel> addMuse(String name){
 
-        return apiCallInstance.getiNetwork()
+        return apiCallInstance.getApiInterface()
                 .addMuselist(new MuseModel(name));
     }
 
     @NonNull
     public Call<ItemModel> addItems(String name, String itemId){
 
-        return  apiCallInstance.getiNetwork()
+        return  apiCallInstance.getApiInterface()
                 .addItems(itemId, new ItemModel(name));
     }
 
@@ -87,13 +95,17 @@ public class ApiManager {
     public Call<DeleteMuse> deleteMuse(String id){
 
         return apiCallInstance
-                .getiNetwork()
+                .getApiInterface()
                 .deleteMuseList(id);
     }
 
+    @NonNull
     public Call<ArrayList<MuseModel>> getMuseLists() {
 
-        return apiCallInstance.getiNetwork()
+        this.apiCallInstance.setApiInterface(RetrofitInstance
+                .retrofitInstance(this.url, context));
+
+        return apiCallInstance.getApiInterface()
                 .getMuselist();
     }
 
