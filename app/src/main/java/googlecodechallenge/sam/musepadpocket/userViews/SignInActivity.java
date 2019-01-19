@@ -19,6 +19,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import googlecodechallenge.sam.musepadpocket.R;
+import googlecodechallenge.sam.musepadpocket.api.ApiManager;
+import googlecodechallenge.sam.musepadpocket.api.ApiResponse;
+import googlecodechallenge.sam.musepadpocket.models.UserModel;
 import googlecodechallenge.sam.musepadpocket.networkutils.ApiCalls;
 import googlecodechallenge.sam.musepadpocket.networkutils.BuildUrls;
 import googlecodechallenge.sam.musepadpocket.museViews.MuseListActivityFree;
@@ -38,7 +41,6 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
     @BindView(R.id.et_password)
     EditText et_password_input;
 
-    @NonNull
     private String userName = "",
             password="";
 
@@ -49,6 +51,8 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
 
         ButterKnife.bind(this);
         signup.setOnClickListener(this);
+
+
 
         StrictMode.ThreadPolicy policy =new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
@@ -67,8 +71,11 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
 
             this.userName = et_user_name_input.getText().toString();
             this.password = et_password_input.getText().toString();
+            ApiResponse apiResponse = new ApiResponse(userName, password,this, getResources()
+                    .getString(R.string.muse_base_url));
 
-            signIn();
+            apiResponse.login();
+
 
         }
     }
