@@ -1,4 +1,4 @@
-package googlecodechallenge.sam.musepadpocket.datamodel.database;
+package googlecodechallenge.sam.musepadpocket.datamodel.databaseinterfaces;
 
 import java.util.List;
 
