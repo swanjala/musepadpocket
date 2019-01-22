@@ -20,13 +20,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".view.userViews.RegisterActivity"/>
         <activity android:name=".museViews.MuseListActivityFree"/>
-        <activity android:name=".museViews.ViewNotesActivity"/>
-        <activity android:name=".museViews.EditNoteActivity"/>
-        <activity android:name=".museViews.AddNoteActivity"/>
-        <activity android:name=".museViews.AddMuseActivity"/>
+
     </application>
 
 </manifest>
