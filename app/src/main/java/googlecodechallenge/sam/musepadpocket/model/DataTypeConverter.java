@@ -1,4 +1,4 @@
-package googlecodechallenge.sam.musepadpocket.models;
+package googlecodechallenge.sam.musepadpocket.model;
 
 import android.arch.persistence.room.TypeConverter;
 
@@ -6,11 +6,8 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import static java.util.Collections.emptyList;
 
 public class DataTypeConverter {
 
