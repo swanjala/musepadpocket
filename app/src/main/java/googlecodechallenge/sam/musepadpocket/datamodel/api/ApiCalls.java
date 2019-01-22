@@ -1,4 +1,4 @@
-package googlecodechallenge.sam.musepadpocket.api;
+package googlecodechallenge.sam.musepadpocket.datamodel.api;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,8 +10,11 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import googlecodechallenge.sam.musepadpocket.models.MuseModel;
-import googlecodechallenge.sam.musepadpocket.models.UserModel;
+import googlecodechallenge.sam.musepadpocket.R;
+import googlecodechallenge.sam.musepadpocket.app.AppExecutor;
+import googlecodechallenge.sam.musepadpocket.datamodel.database.MuseDatabase;
+import googlecodechallenge.sam.musepadpocket.model.MuseModel;
+import googlecodechallenge.sam.musepadpocket.model.UserModel;
 import googlecodechallenge.sam.musepadpocket.museViews.MuseListActivityFree;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -25,15 +28,48 @@ public class ApiResponse {
     private Context context;
     private String userName, password,url;
 
-    public ApiResponse(Context context, String url){
+    public ApiResponse(Context context){
         this.context = context;
-        this.url = url;
     }
     public ApiResponse(String userName,String password,Context context, String url){
         this.userName = userName;
         this.password = password;
         this.url = url;
         this.context = context;
+    }
+    public boolean getMuseViewModel() {
+
+
+        Call<ArrayList<MuseModel>> call = new ApiManager( context,
+                context.getResources().getString(R.string.muse_base_url))
+                .getMuseLists();
+        call.enqueue(new Callback<ArrayList<MuseModel>>() {
+
+            @Override
+            public void onResponse(Call<ArrayList<MuseModel>> call, Response<ArrayList<MuseModel>> response) {
+                final ArrayList<MuseModel> museListData = new ArrayList<>();
+
+                museListData.addAll(response.body());
+
+               AppExecutor.getDatabaseInstance().getDiskIO().execute(new Runnable() {
+                   @Override
+                   public void run() {
+                       MuseDatabase museDatabase = MuseDatabase.getDatabase(context);
+                       museDatabase.museListDao().insertMuse(museListData);
+
+                   }
+               });
+
+                }
+
+            @Override
+            public void onFailure(Call<ArrayList<MuseModel>> call, Throwable t) {
+                Log.d("Error","Data Not loaded");
+            }
+        });
+
+        return true;
+
     }
 
     public void login(){

@@ -1,8 +1,7 @@
-package googlecodechallenge.sam.musepadpocket.api;
+package googlecodechallenge.sam.musepadpocket.networkutils.api;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.text.LoginFilter;
 
 import java.util.ArrayList;
 
@@ -12,7 +11,7 @@ import googlecodechallenge.sam.musepadpocket.models.ItemModel;
 import googlecodechallenge.sam.musepadpocket.models.LoginModel;
 import googlecodechallenge.sam.musepadpocket.models.MuseModel;
 import googlecodechallenge.sam.musepadpocket.models.UserModel;
-import googlecodechallenge.sam.musepadpocket.networkutils.RetrofitInstance;
+import googlecodechallenge.sam.musepadpocket.networkutils.retrofit.RetrofitInstance;
 import retrofit2.Call;
 
 public class ApiManager {

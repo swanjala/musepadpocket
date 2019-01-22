@@ -1,4 +1,4 @@
-package googlecodechallenge.sam.musepadpocket.api;
+package googlecodechallenge.sam.musepadpocket.networkutils.api;
 
 public class ApiCallInstance {
     private ApiInterface apiInterface;

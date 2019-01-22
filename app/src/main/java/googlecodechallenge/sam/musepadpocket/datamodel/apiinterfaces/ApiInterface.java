@@ -1,12 +1,12 @@
-package googlecodechallenge.sam.musepadpocket.api;
+package googlecodechallenge.sam.musepadpocket.datamodel.api;
 
 import java.util.ArrayList;
 
-import googlecodechallenge.sam.musepadpocket.models.DeleteMuse;
-import googlecodechallenge.sam.musepadpocket.models.ItemModel;
-import googlecodechallenge.sam.musepadpocket.models.LoginModel;
-import googlecodechallenge.sam.musepadpocket.models.MuseModel;
-import googlecodechallenge.sam.musepadpocket.models.UserModel;
+import googlecodechallenge.sam.musepadpocket.model.DeleteMuse;
+import googlecodechallenge.sam.musepadpocket.model.ItemModel;
+import googlecodechallenge.sam.musepadpocket.model.LoginModel;
+import googlecodechallenge.sam.musepadpocket.model.MuseModel;
+import googlecodechallenge.sam.musepadpocket.model.UserModel;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;

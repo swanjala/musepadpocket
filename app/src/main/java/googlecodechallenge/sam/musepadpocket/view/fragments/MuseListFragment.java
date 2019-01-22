@@ -1,34 +1,36 @@
 package googlecodechallenge.sam.musepadpocket.fragments;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import googlecodechallenge.sam.musepadpocket.R;
 import googlecodechallenge.sam.musepadpocket.models.MuseModel;
+import googlecodechallenge.sam.musepadpocket.viewmodel.MuseViewModel;
 
 public class MuseListFragment extends Fragment {
 
 
-    private ArrayList<MuseModel> museData;
     private static final String MUSE_DATA ="DataDetails";
 
     MuseListFragment.OnMuseListLoadedListener museListLoadedListener;
 
     public interface  OnMuseListLoadedListener{
-        void onLoadMuseLists(ArrayList<MuseModel> data);
+        void onLoadMuseLists(List<MuseModel> data);
     }
     public MuseListFragment(){
 
@@ -47,15 +49,9 @@ public class MuseListFragment extends Fragment {
                 container,false);
 
         final RecyclerView recyclerView = rootView.findViewById(R.id.rc_muse_list_viewer);
-        Bundle bundle = this.getArguments();
 
-        if (bundle != null) {
-            museData = bundle.getParcelableArrayList(MUSE_DATA);
-        }
+        loadRecyclerView(recyclerView);
 
-        FragmentAdapter fragmentAdapter = new FragmentAdapter(museData);
-        recyclerView.setAdapter(fragmentAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         FloatingActionButton floatingActionButton = rootView.findViewById(
                 R.id.fb_add_muse);
@@ -76,15 +72,31 @@ public class MuseListFragment extends Fragment {
         return rootView;
 
     }
+    private void loadRecyclerView(final RecyclerView recyclerView ) {
+        MuseViewModel museViewModel = ViewModelProviders.of(this)
+                .get(MuseViewModel.class);
+        museViewModel.getMuses().observe(this, new Observer<List<MuseModel>>() {
+            @Override
+            public void onChanged(@Nullable List<MuseModel> museModelData) {
+
+                FragmentAdapter fragmentAdapter = new FragmentAdapter(museModelData);
+                recyclerView.setAdapter(fragmentAdapter);
+                recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+            }
+        });
+    }
+
+
 
     public class FragmentAdapter extends
             RecyclerView.Adapter<FragmentAdapter.ViewHolder> {
 
-        private ArrayList<MuseModel> mDataSet;
+        private List<MuseModel> mDataSet;
         private LayoutInflater layoutInflater;
         private Context context;
 
-        public FragmentAdapter(ArrayList<MuseModel> data){
+        public FragmentAdapter(List<MuseModel> data){
             this.mDataSet = data;
         }
         public class ViewHolder extends RecyclerView.ViewHolder {
@@ -102,7 +114,8 @@ public class MuseListFragment extends Fragment {
         }
         @Override
         public FragmentAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
-            View view = layoutInflater.inflate(R.layout.activity_muse_list_view_card_layout,
+            View view = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.activity_muse_list_view_card_layout,
                     parent, false);
             return new ViewHolder(view);
         }
@@ -112,7 +125,7 @@ public class MuseListFragment extends Fragment {
                                      int position){
             holder.tv_muse_name.setText(String.valueOf(mDataSet.get(position).getName()));
             holder.tv_date_created.setText(String.valueOf(mDataSet.get(position).getDateCreated()));
-            museListLoadedListener.onLoadMuseLists(museData);
+            //museListLoadedListener.onLoadMuseLists(museData);
         }
 
         @Override
