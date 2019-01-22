@@ -1,4 +1,4 @@
-package googlecodechallenge.sam.musepadpocket.models;
+package googlecodechallenge.sam.musepadpocket.model;
 
 public class LoginModel {
 

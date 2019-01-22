@@ -22,8 +22,6 @@ import googlecodechallenge.sam.musepadpocket.R;
 import googlecodechallenge.sam.musepadpocket.api.ApiManager;
 import googlecodechallenge.sam.musepadpocket.api.ApiResponse;
 import googlecodechallenge.sam.musepadpocket.models.UserModel;
-import googlecodechallenge.sam.musepadpocket.networkutils.ApiCalls;
-import googlecodechallenge.sam.musepadpocket.networkutils.BuildUrls;
 import googlecodechallenge.sam.musepadpocket.museViews.MuseListActivityFree;
 
 /*
@@ -52,8 +50,6 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         ButterKnife.bind(this);
         signup.setOnClickListener(this);
 
-
-
         StrictMode.ThreadPolicy policy =new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
@@ -76,32 +72,8 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
 
             apiResponse.login();
 
-
         }
     }
 
-    public void signIn(){
-        BuildUrls buildUrls = new BuildUrls(this);
-        URL url = buildUrls.buildUrlForUserLogin();
-        Log.d("Url",String.valueOf(url));
-
-        ApiCalls apiCalls = new ApiCalls();
-
-        String successToken= apiCalls.login(url,userName, password);
-
-        if (successToken.equals("")){
-            Toast.makeText(this, R.string.unable_to_login,Toast.LENGTH_LONG).show();
-
-        }else {
-            SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
-            sp.edit().putString("token", successToken).apply();
-            Intent intent = new Intent(this, MuseListActivityFree.class);
-            intent.putExtra("Token",successToken);
-
-
-            startActivity(intent);
-
-        }
-    }
 
 }

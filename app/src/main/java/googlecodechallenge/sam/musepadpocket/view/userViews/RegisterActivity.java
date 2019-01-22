@@ -16,8 +16,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import googlecodechallenge.sam.musepadpocket.R;
-import googlecodechallenge.sam.musepadpocket.networkutils.ApiCalls;
-import googlecodechallenge.sam.musepadpocket.networkutils.BuildUrls;
 
 /**
  * Class lets the user sign up , added to a remote database
@@ -55,24 +53,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             this.email = et_register_email.getText().toString();
             this.password = et_register_password.getText().toString();
 
-            signUp();
+         //   signUp();  --> replace with retrofit
         }
     }
 
-
-    public void signUp(){
-        BuildUrls buildUrls = new BuildUrls(this);
-        URL url = buildUrls.buildUrlForUserSignUp();
-
-        ApiCalls apiCalls = new ApiCalls(url,username,password,email);
-        boolean successRegister = apiCalls.registerUser();
-        if (successRegister){
-            Toast.makeText(this, R.string.success_registration,Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(this, SignInActivity.class);
-            startActivity(intent);
-        }else {
-            Toast.makeText(this, R.string.unable_to_register,Toast.LENGTH_SHORT).show();
-
-        }
-    }
 }

@@ -1,16 +1,17 @@
 package googlecodechallenge.sam.musepadpocket.models;
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
+import android.arch.persistence.room.TypeConverters;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.net.MalformedURLException;
-import java.util.ArrayList;
-import java.util.List;
-
 import com.google.gson.annotations.Expose;
-
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
+@Entity(tableName = "muselist")
 public class MuseModel implements Parcelable {
 
     @SerializedName("creator")
@@ -21,10 +22,12 @@ public class MuseModel implements Parcelable {
     private String dateCreated;
     @SerializedName("id")
     @Expose
+    @PrimaryKey(autoGenerate = true)
     private Integer id;
     @SerializedName("items")
     @Expose
-    private ArrayList<ItemModel> items = null;
+    @TypeConverters(DataTypeConverter.class)
+    private List<ItemModel> items = null;
     @SerializedName("name")
     @Expose
     private String name;
@@ -65,11 +68,11 @@ public class MuseModel implements Parcelable {
         this.id = id;
     }
 
-    public ArrayList<ItemModel> getItems() {
+    public List<ItemModel> getItems() {
         return items;
     }
 
-    public void setItems(ArrayList<ItemModel> items) {
+    public void setItems(List<ItemModel> items) {
         this.items = items;
     }
 
