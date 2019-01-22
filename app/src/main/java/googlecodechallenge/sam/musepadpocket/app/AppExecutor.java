@@ -1,4 +1,4 @@
-package googlecodechallenge.sam.musepadpocket.models;
+package googlecodechallenge.sam.musepadpocket.app;
 
 
 import android.os.Handler;
@@ -22,7 +22,7 @@ public class AppExecutor {
         this.networkIO = networkIO;
     }
     public static AppExecutor getDatabaseInstance() {
-        if (databaseInstance ==null ){
+        if (databaseInstance == null ){
             synchronized (LOCK){
                 databaseInstance = new AppExecutor(Executors.newSingleThreadExecutor(),
                         Executors.newFixedThreadPool(3),
