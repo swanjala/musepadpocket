@@ -11,14 +11,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".userViews.SignInActivity">
+        <activity android:name=".view.userViews.SignInActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".userViews.RegisterActivity"/>
+        <activity android:name=".view.userViews.RegisterActivity"/>
         <activity android:name=".museViews.MuseListActivityPaid"/>
         <activity android:name=".museViews.ViewNotesActivity"/>
         <activity android:name=".museViews.EditNoteActivity"/>
