@@ -1,4 +1,4 @@
-package googlecodechallenge.sam.musepadpocket.models;
+package googlecodechallenge.sam.musepadpocket.model;
 
 /**
  * Created by sam on 7/1/18.
@@ -6,7 +6,7 @@ package googlecodechallenge.sam.musepadpocket.models;
 
 public class UserModel {
 
-    private String userName,password, email,token;
+    private String userName,password, email,token, message;
 
     public UserModel(String userName, String password){
         this.userName = userName;
@@ -47,5 +47,11 @@ public class UserModel {
 
     public String getUserName() {
         return userName;
+    }
+    public void setMessage(String responseMessage){
+        this.message = responseMessage;
+    }
+    public String getMessage(){
+        return message;
     }
 }
