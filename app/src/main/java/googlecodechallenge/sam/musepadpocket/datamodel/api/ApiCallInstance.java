@@ -1,21 +1,17 @@
-package googlecodechallenge.sam.musepadpocket.networkutils.api;
+package googlecodechallenge.sam.musepadpocket.datamodel.api;
+
+import googlecodechallenge.sam.musepadpocket.datamodel.apiinterfaces.ApiInterface;
 
 public class ApiCallInstance {
+
     private ApiInterface apiInterface;
 
-    private String url;
-
-    public ApiInterface getApiInterface(){
+    public ApiInterface getApiInterface() {
 
         return this.apiInterface;
     }
-    public  void setApiInterface(ApiInterface apiInterface){
+
+    public void setApiInterface(ApiInterface apiInterface) {
         this.apiInterface = apiInterface;
-    }
-    public String getUrl() {
-        return this.url;
-    }
-    public void setUrl(String url){
-        this.url = url;
     }
 }
