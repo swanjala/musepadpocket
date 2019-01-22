@@ -1,4 +1,4 @@
-package googlecodechallenge.sam.musepadpocket.database;
+package googlecodechallenge.sam.musepadpocket.datamodel.database;
 
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.Room;
@@ -6,7 +6,8 @@ import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 import android.util.Log;
 
-import googlecodechallenge.sam.musepadpocket.models.MuseModel;
+import googlecodechallenge.sam.musepadpocket.datamodel.databaseinterfaces.MuseListDao;
+import googlecodechallenge.sam.musepadpocket.model.MuseModel;
 
 
 @Database(entities = {MuseModel.class}, version = 3)

@@ -1,6 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/et_signup_dialog_user_name_"
+        android:layout_width="306dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="28dp"
+        android:gravity="center"
+        android:hint="User Name"
+        app:layout_constraintEnd_toEndOf="@+id/imageView"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <EditText
+        android:id="@+id/et_signup_dialog_password"
+        android:layout_width="306dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="8dp"
+        android:hint="Password"
+        android:password="true"
+        app:layout_constraintEnd_toEndOf="@+id/et_signup_dialog_user_name_"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/et_signup_dialog_user_name_"
+        app:layout_constraintTop_toBottomOf="@+id/et_signup_dialog_user_name_"
+        android:gravity="center"
+        />
+
+    <EditText
+        android:id="@+id/et_dialog_email"
+        android:layout_width="304dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="80dp"
+        android:hint="email"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/et_signup_dialog_password"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/et_signup_dialog_password"
+        app:layout_constraintTop_toBottomOf="@+id/et_signup_dialog_password"
+        app:layout_constraintVertical_bias="0.062"
+        android:gravity="center"/>
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="121dp"
+        android:layout_height="188dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.43"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/bookicon" />
+
 
 </android.support.constraint.ConstraintLayout>

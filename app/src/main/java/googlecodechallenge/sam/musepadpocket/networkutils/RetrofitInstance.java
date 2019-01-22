@@ -1,4 +1,4 @@
-package googlecodechallenge.sam.musepadpocket.networkutils.retrofit;
+package googlecodechallenge.sam.musepadpocket.networkutils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -9,7 +9,7 @@ import com.google.gson.GsonBuilder;
 
 import java.io.IOException;
 
-import googlecodechallenge.sam.musepadpocket.networkutils.api.ApiInterface;
+import googlecodechallenge.sam.musepadpocket.datamodel.apiinterfaces.ApiInterface;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
