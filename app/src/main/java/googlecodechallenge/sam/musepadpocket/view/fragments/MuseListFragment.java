@@ -1,11 +1,17 @@
 package googlecodechallenge.sam.musepadpocket.view.fragments;
 
 import android.app.AlertDialog;
+import android.app.Application;
 import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModel;
+import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -22,45 +28,41 @@ import android.widget.Toast;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import googlecodechallenge.sam.musepadpocket.R;
 import googlecodechallenge.sam.musepadpocket.model.MuseModel;
+import googlecodechallenge.sam.musepadpocket.model.UserModel;
 import googlecodechallenge.sam.musepadpocket.viewmodel.MuseViewModel;
+import googlecodechallenge.sam.musepadpocket.viewmodel.UserViewModel;
 
 public class MuseListFragment extends Fragment {
 
 
-    private static final String MUSE_DATA ="DataDetails";
-
-    MuseListFragment.OnMuseListLoadedListener museListLoadedListener;
-
-    public interface  OnMuseListLoadedListener{
-        void onLoadMuseLists(List<MuseModel> data);
-    }
-    public MuseListFragment(){
-
-    }
-
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+
     }
 
     @Override
     public View onCreateView(LayoutInflater layoutInflater, final ViewGroup container,
                              Bundle savedInstanceState){
 
+
         final View rootView = layoutInflater.inflate(R.layout.fragment_muse_list,
                 container,false);
 
-        final RecyclerView recyclerView = rootView.findViewById(R.id.rc_muse_list_viewer);
+       final RecyclerView recyclerView = rootView.findViewById(R.id.rc_muse_list_viewer);
+
+
 
         if (savedInstanceState == null) {
 
             loadRecyclerView(recyclerView);
         }
 
-        FloatingActionButton floatingActionButton = rootView.findViewById(
-                R.id.fb_add_muse);
+        FloatingActionButton floatingActionButton = rootView.findViewById(R.id.fb_add_muse);
 
         floatingActionButton.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -74,13 +76,15 @@ public class MuseListFragment extends Fragment {
 
     }
 
-    protected  void showAddMuseInputDialog(final Context context) {
+    protected void showAddMuseInputDialog(final Context context) {
 
         View promptView = LayoutInflater
                 .from(context)
                 .inflate(R.layout.input_dialog, null);
+
         final EditText museName = promptView.findViewById(R.id.tv_dialog_muse_name);
         final EditText description = promptView.findViewById(R.id.tv_description);
+
 
 
         AlertDialog.Builder alerDialogBuilder = new AlertDialog.Builder(context);
@@ -107,9 +111,28 @@ public class MuseListFragment extends Fragment {
         alert.show();
 
     }
+
     private void loadRecyclerView(final RecyclerView recyclerView ) {
+
+        final Application application = this.getActivity().getApplication();
+
+
+        UserViewModel userViewModel = ViewModelProviders.of(this)
+                .get(UserViewModel.class);
+
+
+        Integer userId =userViewModel.getUser().get(0).getId();
+
+        SharedPreferences sharedPreferences = PreferenceManager
+                .getDefaultSharedPreferences(application.getApplicationContext());
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt("userId",userId);
+        editor.apply();
+
         MuseViewModel museViewModel = ViewModelProviders.of(this)
                 .get(MuseViewModel.class);
+
+
         museViewModel.getMuses().observe(this, new Observer<List<MuseModel>>() {
             @Override
             public void onChanged(@Nullable List<MuseModel> museModelData) {
@@ -120,50 +143,6 @@ public class MuseListFragment extends Fragment {
 
             }
         });
-    }
-
-    public class FragmentAdapter extends
-            RecyclerView.Adapter<FragmentAdapter.ViewHolder> {
-
-        private List<MuseModel> mDataSet;
-
-        public FragmentAdapter(List<MuseModel> data){
-            this.mDataSet = data;
-        }
-        public class ViewHolder extends RecyclerView.ViewHolder {
-            TextView tv_muse_name;
-
-            TextView tv_date_created;
-
-            public ViewHolder(View itemView){
-
-                super(itemView);
-                this.tv_muse_name = itemView.findViewById(R.id.tv_display_entry_text);
-                this.tv_date_created = itemView.findViewById(R.id.tv_items_day_display);
-            }
-
-        }
-        @Override
-        public FragmentAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
-            View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.activity_muse_list_view_card_layout,
-                            parent, false);
-            return new ViewHolder(view);
-        }
-
-        @Override
-        public void onBindViewHolder(FragmentAdapter.ViewHolder holder,
-                                     int position){
-            holder.tv_muse_name.setText(String.valueOf(mDataSet.get(position).getName()));
-            holder.tv_date_created.setText(String.valueOf(mDataSet.get(position).getDateCreated()));
-
-        }
-
-        @Override
-        public int getItemCount() {
-            return mDataSet.size();
-        }
-
     }
 
 
