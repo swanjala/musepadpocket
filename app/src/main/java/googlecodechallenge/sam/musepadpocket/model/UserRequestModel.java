@@ -1,16 +1,17 @@
 package googlecodechallenge.sam.musepadpocket.model;
 
+import android.support.annotation.NonNull;
+
 public class UserRequestModel {
 
     String username, password,email;
-    public UserRequestModel(String username, String password){
-        this.username = username;
-        this.password = password;
+
+    public UserRequestModel(@NonNull UserModel userModel){
+
+        this.username = userModel.getUserName();
+        this.password = userModel.getPassword();
+        this.email = userModel.getEmail();
 
     }
-    public UserRequestModel(String username,String password, String email){
-        this.username = username;
-        this.password = password;
-        this.email = email;
-    }
+
 }

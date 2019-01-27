@@ -1,17 +1,23 @@
 package googlecodechallenge.sam.musepadpocket.datamodel.api;
 
-import googlecodechallenge.sam.musepadpocket.datamodel.apiinterfaces.ApiInterface;
+import android.support.annotation.NonNull;
+
+import googlecodechallenge.sam.musepadpocket.datamodel.apiinterfaces.RetrofitInterface;
 
 public class ApiCallInstance {
 
-    private ApiInterface apiInterface;
 
-    public ApiInterface getApiInterface() {
+    private RetrofitInterface retrofitInterface;
 
-        return this.apiInterface;
+    public void setRetrofitInterface(RetrofitInterface retrofitInstance) {
+        this.retrofitInterface = retrofitInstance;
     }
 
-    public void setApiInterface(ApiInterface apiInterface) {
-        this.apiInterface = apiInterface;
+    @NonNull
+    public RetrofitInterface getRetrofitInterface() {
+
+        return this.retrofitInterface;
     }
+
+
 }
