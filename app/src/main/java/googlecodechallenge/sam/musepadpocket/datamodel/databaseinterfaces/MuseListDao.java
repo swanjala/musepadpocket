@@ -12,8 +12,8 @@ import googlecodechallenge.sam.musepadpocket.model.MuseModel;
 
 @Dao
 public interface MuseListDao {
-    @Query("SELECT * FROM muselist")
-    LiveData<List<MuseModel>> fetchAll();
+    @Query("SELECT * FROM muselist where uId = :id")
+    LiveData<List<MuseModel>> fetchAll(Integer id);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertMuse(List<MuseModel> museEntry);
