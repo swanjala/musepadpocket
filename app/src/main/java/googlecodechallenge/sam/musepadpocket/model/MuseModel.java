@@ -1,18 +1,31 @@
 package googlecodechallenge.sam.musepadpocket.model;
 
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.PrimaryKey;
 import android.arch.persistence.room.TypeConverters;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-@Entity(tableName = "muselist")
+import static android.arch.persistence.room.ForeignKey.CASCADE;
+
+@Entity(tableName = "muselist",
+        foreignKeys = @ForeignKey(entity = UserModel.class,
+                parentColumns = "id",
+                childColumns = "uId",
+                onDelete = CASCADE))
 public class MuseModel implements Parcelable {
+
+
+    @SerializedName("uId")
+    @Expose
+    private Integer uId;
 
     @SerializedName("creator")
     @Expose
@@ -36,7 +49,8 @@ public class MuseModel implements Parcelable {
         this.name = name;
 
     }
-    protected  MuseModel(Parcel in) {
+    protected  MuseModel(@NonNull Parcel in) {
+        uId = in.readInt();
         id = in.readInt();
         name = in.readString();
         items = in.readArrayList(ItemModel.class.getClassLoader());
@@ -48,7 +62,7 @@ public class MuseModel implements Parcelable {
         return creator;
     }
 
-    public void setCreator(String creator) {
+    public void setCreator(@NonNull String creator) {
         this.creator = creator;
     }
 
@@ -56,7 +70,7 @@ public class MuseModel implements Parcelable {
         return dateCreated;
     }
 
-    public void setDateCreated(String dateCreated) {
+    public void setDateCreated(@NonNull String dateCreated) {
         this.dateCreated = dateCreated;
     }
 
@@ -64,7 +78,14 @@ public class MuseModel implements Parcelable {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setUId(Integer uId) {
+        this.uId = uId;
+    }
+    public Integer getUId() {
+        return uId;
+    }
+
+    public void setId(@NonNull Integer id) {
         this.id = id;
     }
 
@@ -72,7 +93,7 @@ public class MuseModel implements Parcelable {
         return items;
     }
 
-    public void setItems(List<ItemModel> items) {
+    public void setItems(@NonNull List<ItemModel> items) {
         this.items = items;
     }
 
@@ -80,7 +101,7 @@ public class MuseModel implements Parcelable {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(@NonNull String name) {
         this.name = name;
     }
     @Override
@@ -90,6 +111,7 @@ public class MuseModel implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel parcel, int i){
+        parcel.writeInt(uId);
         parcel.writeInt(id);
         parcel.writeString(name);
         parcel.writeString(creator);
