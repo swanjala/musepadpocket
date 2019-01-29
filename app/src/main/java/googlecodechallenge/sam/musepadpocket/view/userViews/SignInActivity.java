@@ -20,6 +20,7 @@ import butterknife.OnClick;
 import googlecodechallenge.sam.musepadpocket.R;
 import googlecodechallenge.sam.musepadpocket.datamodel.api.ApiCalls;
 import googlecodechallenge.sam.musepadpocket.datamodel.apiinterfaces.IApiCalls;
+import googlecodechallenge.sam.musepadpocket.model.UserModel;
 
 /*
 * Class lets the user sign into the application
@@ -68,9 +69,10 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
 
             this.userName = et_user_name_input.getText().toString();
             this.password = et_password_input.getText().toString();
-            IApiCalls apiCalls = new ApiCalls(userName, password,this, getResources()
-                    .getString(R.string.muse_base_url));
+            UserModel userModel = new UserModel(et_user_name_input.getText().toString()
+                    , et_password_input.getText().toString());
 
+            IApiCalls apiCalls = new ApiCalls(userModel, this);
             apiCalls.login();
 
         }
@@ -96,9 +98,10 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 Toast.makeText(context, "Signed up", Toast.LENGTH_LONG).show();
-                              IApiCalls apiCalls = new ApiCalls(et_userName.getText().toString(),
-                                      et_password.getText().toString(),et_email.getText().toString(),
-                                      getApplicationContext());
+
+                                UserModel userModel = new UserModel(et_userName.getText().toString(),
+                              et_password.getText().toString(), et_email.getText().toString());
+                              IApiCalls apiCalls = new ApiCalls(userModel, getApplicationContext());
                               apiCalls.register();
                             }
                         })
