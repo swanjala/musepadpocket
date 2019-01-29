@@ -2,6 +2,7 @@ package googlecodechallenge.sam.musepadpocket.datamodel.api;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -16,51 +17,27 @@ import retrofit2.Call;
 public class ApiManager {
 
     private Context context;
-    private String username, password, email;
     private  String url;
     UserModel userModel = new UserModel();
 
-    ApiCallInstance apiCallInstance = new ApiCallInstance();
+    ApiCallInstance apiCallInstance;
 
-    public ApiManager(Context context, String url){
+    public ApiManager(ApiCallInstance apiCallInstance,Context context){
         this.url =url;
         this.context = context;
+        this.apiCallInstance = apiCallInstance;
     }
 
-    public ApiManager(String username, String password,
+    public ApiManager(ApiCallInstance apiCallInstance,UserModel userModel,
                       Context context){
-        this.userModel.setUserName(username);
-        this.userModel.setPassword(password);
-
-        this.url = context.getResources().getString(R.string.muse_base_url);
+        this.userModel = userModel;
         this.context =context;
-        this.apiCallInstance.setApiInterface(RetrofitInstance.retrofitInstance(url,
-                context));
-    }
-
-    public ApiManager( String name, String password,
-                      String email, final Context context){
-        this.context = context;
-        this.username = name;
-        this.password = password;
-        this.email= email;
-
-    }
-
-    public ApiManager(String name, String password, Context context,
-                      String url){
-        this.username = name;
-        this.password = password;
-        this.url = url;
-        this.context = context;
+        this.apiCallInstance = apiCallInstance;
     }
 
     public Call<UserModel> login() {
 
-        this.apiCallInstance.setApiInterface(RetrofitInstance
-                .retrofitInstance(this.url,context));
-
-        UserRequestModel loginModel = new UserRequestModel(this.username,this.password);
+        UserRequestModel loginModel = new UserRequestModel(userModel);
 
         return apiCallInstance.getApiInterface()
                 .login(loginModel);
@@ -68,11 +45,8 @@ public class ApiManager {
 
     public Call<UserModel> registerUser(){
 
-        this.apiCallInstance.setApiInterface(RetrofitInstance.retrofitInstance(context
-                .getResources().getString(R.string.muse_base_url),context));
-
         UserRequestModel registrationModel =
-                new UserRequestModel(this.username,this.password,email);
+                new UserRequestModel(userModel);
 
         return apiCallInstance.getApiInterface().registerUser(registrationModel);
 
@@ -94,9 +68,6 @@ public class ApiManager {
 
     @NonNull
     public Call<ArrayList<MuseModel>> getMuseLists() {
-
-        this.apiCallInstance.setApiInterface(RetrofitInstance
-                .retrofitInstance(this.url, context));
 
         return apiCallInstance.getApiInterface()
                 .getMuselist();
