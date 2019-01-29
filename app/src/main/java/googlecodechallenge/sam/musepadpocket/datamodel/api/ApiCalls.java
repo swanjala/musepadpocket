@@ -10,48 +10,52 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import googlecodechallenge.sam.musepadpocket.R;
 import googlecodechallenge.sam.musepadpocket.app.AppExecutor;
 import googlecodechallenge.sam.musepadpocket.datamodel.apiinterfaces.IApiCalls;
 import googlecodechallenge.sam.musepadpocket.datamodel.database.MuseDatabase;
 import googlecodechallenge.sam.musepadpocket.model.MuseModel;
 import googlecodechallenge.sam.musepadpocket.model.UserModel;
 import googlecodechallenge.sam.musepadpocket.museViews.MuseListActivityFree;
+import googlecodechallenge.sam.musepadpocket.networkutils.RetrofitInstance;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
 
 public class ApiCalls implements IApiCalls {
 
     public Throwable throwable;
 
     private Context context;
-    private String userName, password, url, email;
+    private String userName, password, email;
+
 
     public ApiCalls(Context context) {
         this.context = context;
     }
 
-    public ApiCalls(String userName, String password, Context context, String url) {
-        this.userName = userName;
-        this.password = password;
-        this.url = url;
+    public ApiCalls(@NonNull UserModel userModel,
+                    @NonNull Context context) {
+
+        this.userName = userModel.getUserName();
+        this.password = userModel.getPassword();
+
+        if(userModel.getEmail() != null){
+            this.email = userModel.getEmail();
+        }else {
+            this.email = "";
+        }
         this.context = context;
 
-    }
-    public ApiCalls(String userName, String password,
-                    String email, Context context){
-        this.userName = userName;
-        this.password = password;
-        this.email = email;
-        this.context = context;
     }
 
     @Override
     public boolean getMuseViewModel() {
 
-        Call<ArrayList<MuseModel>> call = new ApiManager(context,
-                context.getResources().getString(R.string.muse_base_url))
+        ApiCallInstance apiCallInstance = new
+                ApiCallInstance(RetrofitInstance.retrofitInstance(context));
+
+        Call<ArrayList<MuseModel>> call = new ApiManager(apiCallInstance,context)
                 .getMuseLists();
         call.enqueue(new Callback<ArrayList<MuseModel>>() {
 
@@ -84,16 +88,20 @@ public class ApiCalls implements IApiCalls {
 
     @Override
     public void register(){
+        ApiCallInstance apiCallInstance = new ApiCallInstance(RetrofitInstance
+        .retrofitInstance(context));
+
+        UserModel userModel = new UserModel(userName, password, email);
         Call<UserModel> call = new
-                ApiManager(userName,password, email, context).registerUser();
+                ApiManager(apiCallInstance,userModel, context).registerUser();
 
         call.enqueue(new Callback<UserModel>() {
             @Override
             public void onResponse(Call<UserModel> call, Response<UserModel> response) {
                 if (response.body() != null){
-                    if (response.body().getMessage().equals("You have been successfully added as"+userName)){
-                        Toast.makeText(context,"" +response.body().getMessage(),
-                                Toast.LENGTH_LONG).show();
+                    if (response.code() == 200){
+                        Toast.makeText(context,"" +
+                                response.body().getMessage(), Toast.LENGTH_LONG).show();
                     }
                 }
             }
@@ -108,31 +116,48 @@ public class ApiCalls implements IApiCalls {
     @Override
     public void login() {
 
-        Call<UserModel> call = new ApiManager(userName, password, context, url)
+        UserModel userModel = new UserModel(userName, password);
+
+        ApiCallInstance apiCallInstance = new ApiCallInstance(RetrofitInstance
+                .retrofitInstance(context));
+
+        Call<UserModel> call = new ApiManager(apiCallInstance,userModel, context)
                 .login();
 
         call.enqueue(new Callback<UserModel>() {
             @Override
             public void onResponse(Call<UserModel> call, Response<UserModel> response) {
 
+                try {
 
-                if (response.body().getToken() != null) {
+                    if (response.code() == 404) {
+                        Toast.makeText(context, "Unable to reach the muse pad server" +
+                                " try again later", Toast.LENGTH_LONG).show();
 
-                    Toast.makeText(context, "Token info" + response.body().getToken(),
-                            Toast.LENGTH_LONG).show();
+                    } else if(response.code() == 200){
+                        Toast.makeText(context, "Token info" + response.body().getToken(),
+                                Toast.LENGTH_LONG).show();
 
-                    SharedPreferences sharedPreferences = PreferenceManager
-                            .getDefaultSharedPreferences(context);
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putString("token", response.body().getToken());
-                    editor.apply();
-                    Intent intent = new Intent(context, MuseListActivityFree.class);
-                    context.startActivity(intent);
-                } else {
-                    Toast.makeText(context, "Login not sucessful",
-                            Toast.LENGTH_LONG).show();
+                        SharedPreferences sharedPreferences = PreferenceManager
+                                .getDefaultSharedPreferences(context);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putString("token", response.body().getToken());
+                        editor.apply();
+                        Intent intent = new Intent(context, MuseListActivityFree.class);
+                        context.startActivity(intent);
+                    }
+                    else {
+                        Toast.makeText(context, "Unable to log you in.",
+                                Toast.LENGTH_LONG).show();
+                    }
+                }catch (Exception e){
+                    Toast.makeText(context, "Error "+e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+
+
+                    Log.d("This is error", e.getLocalizedMessage());
                 }
             }
+
 
             @Override
             public void onFailure(Call<UserModel> call, Throwable t) {
