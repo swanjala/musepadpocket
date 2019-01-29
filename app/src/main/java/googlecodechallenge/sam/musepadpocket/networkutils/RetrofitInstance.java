@@ -9,6 +9,7 @@ import com.google.gson.GsonBuilder;
 
 import java.io.IOException;
 
+import googlecodechallenge.sam.musepadpocket.R;
 import googlecodechallenge.sam.musepadpocket.datamodel.apiinterfaces.ApiInterface;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -19,8 +20,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitInstance {
 
-    public static ApiInterface retrofitInstance(String url, Context context){
+    public static ApiInterface retrofitInstance(Context context){
 
+
+        // implement the url by getting the context
         final SharedPreferences sharedPreferences = PreferenceManager
                 .getDefaultSharedPreferences(context);
 
@@ -46,7 +49,7 @@ public class RetrofitInstance {
         OkHttpClient client = builder.build();
 
         Retrofit.Builder retrofitBuilder = new Retrofit.Builder()
-                .baseUrl(url)
+                .baseUrl(context.getResources().getString(R.string.muse_base_url))
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .client(client);
         Retrofit retrofit = retrofitBuilder.build();
