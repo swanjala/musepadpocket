@@ -6,12 +6,13 @@ public class ApiCallInstance {
 
     private ApiInterface apiInterface;
 
+    public ApiCallInstance(ApiInterface apiInterface){
+        this.apiInterface = apiInterface;
+    }
+
     public ApiInterface getApiInterface() {
 
         return this.apiInterface;
     }
 
-    public void setApiInterface(ApiInterface apiInterface) {
-        this.apiInterface = apiInterface;
-    }
 }
