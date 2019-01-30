@@ -1,5 +1,6 @@
 package googlecodechallenge.sam.musepadpocket.museViews;
 
+import android.app.Application;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -23,6 +24,7 @@ public class MuseListActivityFree extends AppCompatActivity  implements View.OnC
 
     private FragmentManager fragmentManager =
             getSupportFragmentManager();
+    private static final String TAG = "MuseListActivityFree";
 
     @Override
     protected void onCreate(Bundle onSavedInstanceState) {

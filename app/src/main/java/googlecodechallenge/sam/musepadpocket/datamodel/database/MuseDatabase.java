@@ -7,10 +7,12 @@ import android.content.Context;
 import android.util.Log;
 
 import googlecodechallenge.sam.musepadpocket.datamodel.databaseinterfaces.MuseListDao;
+import googlecodechallenge.sam.musepadpocket.datamodel.databaseinterfaces.UserDao;
 import googlecodechallenge.sam.musepadpocket.model.MuseModel;
+import googlecodechallenge.sam.musepadpocket.model.UserModel;
 
 
-@Database(entities = {MuseModel.class}, version = 3)
+@Database(entities = {UserModel.class, MuseModel.class}, version = 7)
 
 public abstract class MuseDatabase extends RoomDatabase {
 
@@ -35,4 +37,5 @@ public abstract class MuseDatabase extends RoomDatabase {
     }
 
     public abstract MuseListDao museListDao();
+    public abstract UserDao userDao();
 }

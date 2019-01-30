@@ -33,7 +33,9 @@ public class ApiManager {
         this.userModel = userModel;
         this.context =context;
         this.apiCallInstance = apiCallInstance;
+
     }
+
 
     public Call<UserModel> login() {
 
@@ -42,6 +44,7 @@ public class ApiManager {
         return apiCallInstance.getApiInterface()
                 .login(loginModel);
     }
+
 
     public Call<UserModel> registerUser(){
 
@@ -66,10 +69,11 @@ public class ApiManager {
                 .addItems(itemId, new ItemModel(name));
     }
 
-    @NonNull
     public Call<ArrayList<MuseModel>> getMuseLists() {
 
+
         return apiCallInstance.getApiInterface()
+
                 .getMuselist();
     }
 

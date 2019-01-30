@@ -11,11 +11,13 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import googlecodechallenge.sam.musepadpocket.app.AppExecutor;
+import googlecodechallenge.sam.musepadpocket.datamodel.apiinterfaces.ApiInterface;
 import googlecodechallenge.sam.musepadpocket.datamodel.apiinterfaces.IApiCalls;
 import googlecodechallenge.sam.musepadpocket.datamodel.database.MuseDatabase;
 import googlecodechallenge.sam.musepadpocket.model.MuseModel;
 import googlecodechallenge.sam.musepadpocket.model.UserModel;
 import googlecodechallenge.sam.musepadpocket.museViews.MuseListActivityFree;
+import googlecodechallenge.sam.musepadpocket.networkutils.IRetrofitInstance;
 import googlecodechallenge.sam.musepadpocket.networkutils.RetrofitInstance;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -48,6 +50,7 @@ public class ApiCalls implements IApiCalls {
         this.context = context;
 
     }
+
 
     @Override
     public boolean getMuseViewModel() {
@@ -89,7 +92,7 @@ public class ApiCalls implements IApiCalls {
     @Override
     public void register(){
         ApiCallInstance apiCallInstance = new ApiCallInstance(RetrofitInstance
-        .retrofitInstance(context));
+                .retrofitInstance(context));
 
         UserModel userModel = new UserModel(userName, password, email);
         Call<UserModel> call = new
@@ -150,12 +153,12 @@ public class ApiCalls implements IApiCalls {
                         Toast.makeText(context, "Unable to log you in.",
                                 Toast.LENGTH_LONG).show();
                     }
-                }catch (Exception e){
-                    Toast.makeText(context, "Error "+e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                } catch (Exception e){
+                    Toast.makeText(context,"Incorrect Username or Password"
+                            , Toast.LENGTH_LONG).show();
 
-
-                    Log.d("This is error", e.getLocalizedMessage());
                 }
+
             }
 
 

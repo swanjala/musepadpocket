@@ -2,7 +2,6 @@ package googlecodechallenge.sam.musepadpocket.viewmodel;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
-import android.support.annotation.NonNull;
 
 import googlecodechallenge.sam.musepadpocket.datamodel.api.ApiCallInstance;
 import googlecodechallenge.sam.musepadpocket.datamodel.api.ApiCalls;
@@ -13,7 +12,7 @@ public class UserViewModel extends AndroidViewModel {
 
     private static final String TAG = UserViewModel.class.getSimpleName();
 
-    public UserViewModel(@NonNull Application application){
+    public UserViewModel(Application application){
         super(application);
 
     }

@@ -4,9 +4,10 @@ import googlecodechallenge.sam.musepadpocket.datamodel.apiinterfaces.ApiInterfac
 
 public class ApiCallInstance {
 
+
     private ApiInterface apiInterface;
 
-    public ApiCallInstance(ApiInterface apiInterface){
+    public ApiCallInstance (ApiInterface apiInterface) {
         this.apiInterface = apiInterface;
     }
 

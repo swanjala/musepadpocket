@@ -1,35 +1,54 @@
 package googlecodechallenge.sam.musepadpocket.model;
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
+
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by sam on 7/1/18.
  */
-
+@Entity(tableName = "users")
 public class UserModel {
 
-    private String userName,password, email,token, message;
+    @Expose
+    @SerializedName("id")
+    @PrimaryKey(autoGenerate = true)
+    private Integer id;
 
-    public UserModel(String userName, String password){
+    @Expose
+    @SerializedName("user")
+    private String userName;
+
+    @Expose
+    @SerializedName("password")
+
+    private String password;
+
+    @Expose
+    @SerializedName("email")
+    private String email;
+
+    private String token;
+
+    private String message;
+
+    public UserModel(@NonNull String userName,
+                     @NonNull String password){
         this.userName = userName;
         this.password = password;
     }
-    public UserModel(String userName, String password, String email){
+    public UserModel(@NonNull String userName,
+                     @NonNull String password,
+                     @NonNull String email){
         this.userName = userName;
         this.password = password;
         this.email = email;
     }
     public UserModel() {}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
     public void setToken(String token){
         this.token = token;
     }
@@ -39,6 +58,22 @@ public class UserModel {
 
     public String getEmail() {
         return email;
+    }
+    public void setId(Integer id){
+        this.id =id;
+    }
+    public Integer getId(){
+        return this.id;
+    }
+    public void setUserName(String userName){
+        this.userName = userName;
+    }
+    public void setPassword(String password){
+        this.password = password;
+
+    }
+    public void setEmail(String email){
+        this.email = email;
     }
 
     public String getPassword() {
