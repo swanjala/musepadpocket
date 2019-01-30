@@ -48,6 +48,17 @@ public class MuseListActivityFree extends AppCompatActivity  implements View.OnC
 
     private void addMuse(){ }
 
+    private void fetchMuses() {
+
+        if (fragmentManager.getBackStackEntryCount() == 0 ) {
+            MuseListFragment museListFragment = new MuseListFragment();
+            fragmentManager.beginTransaction()
+                    .add(R.id.listContainer, museListFragment)
+                    .commitAllowingStateLoss();
+        }
+
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         MenuInflater menuInflater = getMenuInflater();
@@ -76,18 +87,6 @@ public class MuseListActivityFree extends AppCompatActivity  implements View.OnC
             fetchMuses();
         }
     }
-
-    private void fetchMuses() {
-
-        if (fragmentManager.getBackStackEntryCount() == 0 ) {
-            MuseListFragment museListFragment = new MuseListFragment();
-            fragmentManager.beginTransaction()
-                    .add(R.id.listContainer, museListFragment)
-                    .commitAllowingStateLoss();
-        }
-
-    }
-
 
 
 }

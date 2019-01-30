@@ -1,8 +1,8 @@
 package googlecodechallenge.sam.musepadpocket.networkutils;
 
 import android.content.Context;
-import googlecodechallenge.sam.musepadpocket.datamodel.apiinterfaces.RetrofitInterface;
+import googlecodechallenge.sam.musepadpocket.datamodel.apiinterfaces.ApiInterface;
 
 public interface IRetrofitInstance {
-      RetrofitInterface retrofitInstance(Context context);
+      ApiInterface retrofitInstance(Context context);
 }

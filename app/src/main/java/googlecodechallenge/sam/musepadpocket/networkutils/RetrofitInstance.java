@@ -3,7 +3,6 @@ package googlecodechallenge.sam.musepadpocket.networkutils;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.support.annotation.NonNull;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -11,7 +10,7 @@ import com.google.gson.GsonBuilder;
 import java.io.IOException;
 
 import googlecodechallenge.sam.musepadpocket.R;
-import googlecodechallenge.sam.musepadpocket.datamodel.apiinterfaces.RetrofitInterface;
+import googlecodechallenge.sam.musepadpocket.datamodel.apiinterfaces.ApiInterface;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -19,11 +18,10 @@ import okhttp3.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class RetrofitInstance implements IRetrofitInstance{
+public class RetrofitInstance {
 
-    @Override
-    public RetrofitInterface retrofitInstance(Context context){
-
+    public static ApiInterface retrofitInstance(Context context){
+        // implement the url by getting the context
         final SharedPreferences sharedPreferences = PreferenceManager
                 .getDefaultSharedPreferences(context);
 
@@ -53,6 +51,6 @@ public class RetrofitInstance implements IRetrofitInstance{
                 .client(client);
         Retrofit retrofit = retrofitBuilder.build();
 
-        return retrofit.create(RetrofitInterface.class);
+        return retrofit.create(ApiInterface.class);
     }
 }

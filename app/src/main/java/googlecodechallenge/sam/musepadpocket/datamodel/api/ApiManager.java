@@ -2,10 +2,11 @@ package googlecodechallenge.sam.musepadpocket.datamodel.api;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import googlecodechallenge.sam.musepadpocket.datamodel.apiinterfaces.RetrofitInterface;
+import googlecodechallenge.sam.musepadpocket.R;
 import googlecodechallenge.sam.musepadpocket.model.ItemModel;
 import googlecodechallenge.sam.musepadpocket.model.UserRequestModel;
 import googlecodechallenge.sam.musepadpocket.model.MuseModel;
@@ -19,59 +20,60 @@ public class ApiManager {
     private  String url;
     UserModel userModel = new UserModel();
 
-    ApiCallInstance apiCallInstance = new ApiCallInstance();
+    ApiCallInstance apiCallInstance;
 
-
-
-    public ApiManager(RetrofitInterface retrofitInstance,Context context){
-
+    public ApiManager(ApiCallInstance apiCallInstance,Context context){
+        this.url =url;
         this.context = context;
-        this.apiCallInstance.setRetrofitInterface(retrofitInstance);
+        this.apiCallInstance = apiCallInstance;
     }
-    public ApiManager(UserModel userModel,
-                      RetrofitInterface retrofitInterface, Context context){
-        this.context = context;
+
+    public ApiManager(ApiCallInstance apiCallInstance,UserModel userModel,
+                      Context context){
         this.userModel = userModel;
-        this.apiCallInstance.setRetrofitInterface(retrofitInterface);
+        this.context =context;
+        this.apiCallInstance = apiCallInstance;
 
     }
 
-    @NonNull
+
     public Call<UserModel> login() {
 
         UserRequestModel loginModel = new UserRequestModel(userModel);
 
-        return apiCallInstance.getRetrofitInterface()
+        return apiCallInstance.getApiInterface()
                 .login(loginModel);
     }
 
-    @NonNull
+
     public Call<UserModel> registerUser(){
 
         UserRequestModel registrationModel =
                 new UserRequestModel(userModel);
 
-        return apiCallInstance.getRetrofitInterface().registerUser(registrationModel);
+        return apiCallInstance.getApiInterface().registerUser(registrationModel);
 
     }
 
     @NonNull
     public Call<MuseModel> addMuse(String name){
 
-        return apiCallInstance.getRetrofitInterface()
+        return apiCallInstance.getApiInterface()
                 .addMuselist(new MuseModel(name));
     }
 
     @NonNull
     public Call<ItemModel> addItems(String name, String itemId){
 
-        return  apiCallInstance.getRetrofitInterface()
+        return  apiCallInstance.getApiInterface()
                 .addItems(itemId, new ItemModel(name));
     }
 
     public Call<ArrayList<MuseModel>> getMuseLists() {
 
-        return apiCallInstance.getRetrofitInterface()
+
+        return apiCallInstance.getApiInterface()
+
                 .getMuselist();
     }
 

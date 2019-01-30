@@ -114,24 +114,8 @@ public class MuseListFragment extends Fragment {
 
     private void loadRecyclerView(final RecyclerView recyclerView ) {
 
-        final Application application = this.getActivity().getApplication();
-
-
-        UserViewModel userViewModel = ViewModelProviders.of(this)
-                .get(UserViewModel.class);
-
-
-        Integer userId =userViewModel.getUser().get(0).getId();
-
-        SharedPreferences sharedPreferences = PreferenceManager
-                .getDefaultSharedPreferences(application.getApplicationContext());
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putInt("userId",userId);
-        editor.apply();
-
         MuseViewModel museViewModel = ViewModelProviders.of(this)
                 .get(MuseViewModel.class);
-
 
         museViewModel.getMuses().observe(this, new Observer<List<MuseModel>>() {
             @Override

@@ -29,12 +29,7 @@ public class MuseViewModel extends AndroidViewModel {
         Log.d(TAG, "Loading muses from database");
 
         final MuseDatabase museDatabase = MuseDatabase.getDatabase(this.getApplication());
-
-
-        SharedPreferences sharedPreferences = PreferenceManager
-                .getDefaultSharedPreferences(application.getApplicationContext());
-        Integer userId =  sharedPreferences.getInt("userId",0);
-        museData = museDatabase.museListDao().fetchAll(userId);
+        museData = museDatabase.museListDao().fetchAll();
 
    }
 
